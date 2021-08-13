@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  height: 900px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+.room-container {
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90%;
+  margin: 30px;
+}
+.room-container hr {
+  width: 90%;
+  margin-right: 9rem;
+  color: rgb(238, 238, 238);
+}
+.search-result-text {
+  font-size: 16px;
+  color: gray;
+}
+
+.map {
+  right: 0;
+  width: 60%;
+  height: 100%;
+  position: sticky;
+}
+
+.scroll-box {
+  width: 40%;
+  overflow-y: scroll;
+}
+
+.scroll-box::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper .room {
+  height: 15rem;
+  padding: 10px;
+}
+
+.footer {
+  width: 100%;
+  height: 10%;
+  text-align: center;
+}
