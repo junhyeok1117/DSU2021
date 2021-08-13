@@ -1,4 +1,4 @@
-package com.dsu2021.pj.domain.user.entity;
+package com.dsu2021.pj.domain.coupon;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +10,4 @@ public class Coupon {
 	private String coupon_name;
 	private String discount_value;
 	private int discount_int;
-	
-	
-
 }
