@@ -1,14 +1,11 @@
-package com.dsu2021.pj.domain.room.entity;
-
-import org.apache.ibatis.type.Alias;
+package com.dsu2021.pj.domain.room.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
-@Alias("room")// RoomMapper.xml에서 쓰기 위한 별명 지정
 @Builder
 @Getter
-public class Room {
+public class RoomRestDTO {
 	private Long room_index;
 	private Long user_index;
 	private Long address_index;

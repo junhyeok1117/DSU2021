@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dsu2021.pj.domain.room.mapper.RoomMapper">
+
+        <select id="selectAllRooms" resultType="room">
+        	SELECT *
+        	FROM room
+        </select>
+        
+        <select id="selectRoomByRoomIndex" resultType="room">
+        	SELECT *
+        	FROM room
+        	WHERE room_index = #{room_index}
+        </select>
+        
+        <select id="selectRoomsByUserIndex" resultType="room">
+        	SELECT *
+        	FROM room
+        	WHERE user_index = #{user_index}
+        </select>
+        
+</mapper>

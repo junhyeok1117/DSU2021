@@ -1,4 +1,4 @@
-package com.dsu2021.pj.domain.coupon;
+package com.dsu2021.pj.domain.coupon.entity;
 
 import lombok.Builder;
 import lombok.Getter;
