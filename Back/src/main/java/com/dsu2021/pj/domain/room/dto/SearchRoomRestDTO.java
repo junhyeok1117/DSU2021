@@ -6,13 +6,12 @@ import lombok.Getter;
 @Builder
 @Getter
 public class SearchRoomRestDTO {
-	private Long room_index;
-	private Long user_index;
-	private Long address_index;
-	private Long category_index;
-	private String name;
-	private int price;
-	private int clean_price;
-	private int max_person;
-	private String content;
+	private String location;
+	private String kind;
+	private String si_do;
+	private String si_gun_gu;
+	private String check_in_date;
+	private String check_out_date;
+	private String adult;
+	private String child;
 }
