@@ -1,9 +1,10 @@
 package com.dsu2021.pj.domain.room.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class SearchedRoomDTO {
 	    private Long room_index;

@@ -3,7 +3,6 @@ package com.dsu2021.pj.domain.room.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +23,17 @@ public class SearchController {
 	
 	@GetMapping("/rooms")
     public ResponseEntity<List<SearchedRoomDTO>> searchRoom(SearchRoomRestDTO searchRoomRestDto){
-		service.searchRoom(searchRoomRestDto);
-        return new ResponseEntity<>(service.searchRoom(searchRoomRestDto),HttpStatus.OK);
+        return service.searchRoom(searchRoomRestDto);
     }
 	
 	@GetMapping("/rooms/{room_index}")
     public ResponseEntity<DetailRoomDTO> getDetailRoom(@PathVariable("room_index") String room_index){
-        return new ResponseEntity<>(service.getDetailRoom(room_index),HttpStatus.OK);
+        return service.getDetailRoom(room_index);
     }
 	
+	@GetMapping("/hellow")
+	public String h() {
+		
+		return "helloasdasd";
+	}
 }

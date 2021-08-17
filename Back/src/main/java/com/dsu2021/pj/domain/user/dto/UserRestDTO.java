@@ -1,10 +1,10 @@
 package com.dsu2021.pj.domain.user.dto;
 
 import java.util.Date;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class UserRestDTO{
     private Long user_index;

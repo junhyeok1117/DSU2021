@@ -1,9 +1,9 @@
 package com.dsu2021.pj.domain.wishlist.entity;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class Wishlist {
 	private Long room_index;

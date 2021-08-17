@@ -1,10 +1,11 @@
 package com.dsu2021.pj.domain.user.entity;
 
 import java.util.Date;
-import lombok.Builder;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class User {
     private Long user_index;

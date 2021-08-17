@@ -1,9 +1,11 @@
 package com.dsu2021.pj.domain.room.entity;
 
-import lombok.Builder;
+
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class Facility {
 	private Long room_index;

@@ -1,10 +1,9 @@
 package com.dsu2021.pj.domain.reservation.entity;
 
-
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class ReservationPersonCount {
     private Long reservation_index;
