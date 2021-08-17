@@ -9,15 +9,17 @@ import lombok.Getter;
 @Getter
 public class Facility {
 	private Long room_index;
+	private Integer bed;
+	private Integer bath;
 	private String tv;
 	private String hair_dryer;
 	private String fire_extinguisher;
 	private String refrigerator;
 	private String microwave;
 	private String cookware;
-	private Integer park;
-	private Integer aircon;
-	private Integer kitchen;
-	private Integer wifi;
-	private Integer washing_machine;
+	private String park;
+	private String aircon;
+	private String kitchen;
+	private String wifi;
+	private String washing_machine;
 }

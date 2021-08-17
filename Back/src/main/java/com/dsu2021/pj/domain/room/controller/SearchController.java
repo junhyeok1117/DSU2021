@@ -31,9 +31,5 @@ public class SearchController {
         return service.getDetailRoom(room_index);
     }
 	
-	@GetMapping("/hellow")
-	public String h() {
-		
-		return "helloasdasd";
-	}
+
 }
