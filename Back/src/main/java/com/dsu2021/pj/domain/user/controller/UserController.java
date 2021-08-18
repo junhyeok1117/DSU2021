@@ -1,5 +1,5 @@
 package com.dsu2021.pj.domain.user.controller;
-import com.dsu2021.pj.domain.user.dto.UserDTO;
+import com.dsu2021.pj.domain.user.dto.UserDto;
 import com.dsu2021.pj.domain.user.entity.User;
 import com.dsu2021.pj.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping
-    ResponseEntity<?> join(@RequestBody UserDTO.UserSaveReq dto) {
+    ResponseEntity<?> join(@RequestBody UserDto.UserSaveReq dto) {
 
 
         return new ResponseEntity<>(userService.user_save(dto), HttpStatus.OK);

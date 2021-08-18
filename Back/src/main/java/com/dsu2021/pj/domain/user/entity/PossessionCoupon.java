@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class PossessionCoupon {
-	private Long user_index;
-	private Long coupon_index;
+	private Long userIndex;
+	private Long couponIndex;
 	private int amount;
-	private Date terminate_date;
+	private Date terminateDate;
 }

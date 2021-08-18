@@ -8,12 +8,12 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Facility {
-	private Long room_index;
+	private Long roomIndex;
 	private Integer bed;
 	private Integer bath;
 	private String tv;
-	private String hair_dryer;
-	private String fire_extinguisher;
+	private String hairDryer;
+	private String fireExtinguisher;
 	private String refrigerator;
 	private String microwave;
 	private String cookware;
@@ -21,5 +21,5 @@ public class Facility {
 	private String aircon;
 	private String kitchen;
 	private String wifi;
-	private String washing_machine;
+	private String washingMachine;
 }

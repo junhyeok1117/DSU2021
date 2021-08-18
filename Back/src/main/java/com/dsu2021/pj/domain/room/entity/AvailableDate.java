@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class AvailableDate {
-	private Long available_date_index;
-	private Long room_index;
+	private Long availableDateIndex;
+	private Long roomIndex;
 	private Date date;
 }

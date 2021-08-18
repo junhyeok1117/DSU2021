@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Coupon {
-	private Long coupon_index;
-	private String coupon_name;
-	private String discount_value;
-	private int discount_int;
+	private Long couponIndex;
+	private String couponName;
+	private String discountValue;
+	private int discountInt;
 }

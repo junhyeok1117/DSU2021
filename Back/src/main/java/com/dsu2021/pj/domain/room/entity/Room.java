@@ -8,13 +8,13 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Room {
-	private Long room_index;
-	private Long user_index;
-	private Long address_index;
-	private Long category_index;
+	private Long roomIndex;
+	private Long userIndex;
+	private Long addressIndex;
+	private Long categoryIndex;
 	private String name;
 	private int price;
-	private int clean_price;
-	private int max_person;
+	private int cleanPrice;
+	private int maxPerson;
 	private String content;
 }

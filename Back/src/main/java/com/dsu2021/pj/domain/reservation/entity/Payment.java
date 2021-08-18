@@ -8,10 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Payment {
-    private Long reservation_index;
-    private Long coupon_index;
-    private Long card_index;
+    private Long reservationIndex;
+    private Long couponIndex;
+    private Long cardIndex;
     private int discount;
-    private Date payment_date;
-    private String payment_value;
+    private Date paymentDate;
+    private String paymentValue;
 }

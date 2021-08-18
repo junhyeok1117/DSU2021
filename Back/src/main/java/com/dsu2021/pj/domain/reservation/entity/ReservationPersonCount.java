@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ReservationPersonCount {
-    private Long reservation_index;
+    private Long reservationIndex;
     private int adult;
     private int child;
 }

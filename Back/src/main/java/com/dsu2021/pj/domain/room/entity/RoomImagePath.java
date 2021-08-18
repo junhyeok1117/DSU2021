@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class RoomImagePath {
-	private Long room_index;
-	private int image_number;
-	private String image_path;
+	private Long roomIndex;
+	private int imageNumber;
+	private String imagePath;
 }

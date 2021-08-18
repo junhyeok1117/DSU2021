@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class UserDTO{
+public class UserDto {
 
     /*
         유저 회원가입 요청 DTO
@@ -27,7 +27,7 @@ public class UserDTO{
         //클라이언트한테 확인차 던지는 값
 
     }
-
+    @Builder
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
