@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@MapperScan(basePackages = "com.dsu2021.pj.domain.room.repository;") // repository에서 mapper 인터페이스로 처리
+@MapperScan(basePackages = {"com.dsu2021.pj.domain"},annotationClass = org.apache.ibatis.annotations.Mapper.class) // repository에서 mapper 인터페이스로 처리
 public class MybatisConfig {
 	
 	@Bean
