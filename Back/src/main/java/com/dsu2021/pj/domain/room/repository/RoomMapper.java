@@ -9,7 +9,7 @@ import com.dsu2021.pj.domain.room.dto.RoomRestDTO;
 import com.dsu2021.pj.domain.room.dto.SearchRoomRestDTO;
 import com.dsu2021.pj.domain.room.dto.SearchedRoomDTO;
 import com.dsu2021.pj.domain.room.entity.Room;
-import com.dsu2021.pj.domain.user.dto.UserRestDTO;
+import com.dsu2021.pj.domain.user.dto.UserRestDto;
 
 @Mapper
 @Repository
@@ -19,7 +19,7 @@ public interface RoomMapper {
 	
 	Room selectRoomByRoomIndex(RoomRestDTO roomRestDTO);
 	
-	List<Room> selectRoomsByUserIndex(UserRestDTO userRestDTO);
+	List<Room> selectRoomsByUserIndex(UserRestDto userRestDto);
 	
 	List<SearchedRoomDTO> searchRoom(SearchRoomRestDTO searchRoomRestDTO);
 }
