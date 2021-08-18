@@ -24,7 +24,7 @@ public class UserDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class UserSelectRes {
-        //클라이언트한테 확인차 던지는 값
+        //클라이언트한테 확인용으로 던지는 값
 
     }
     @Builder
