@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.dsu2021.pj.domain.room.dto.RoomRestDTO;
+import com.dsu2021.pj.domain.room.dto.SearchRoomRestDTO;
+import com.dsu2021.pj.domain.room.dto.SearchedRoomDTO;
 import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.user.dto.UserRestDTO;
 
@@ -18,4 +20,6 @@ public interface RoomMapper {
 	Room selectRoomByRoomIndex(RoomRestDTO roomRestDTO);
 	
 	List<Room> selectRoomsByUserIndex(UserRestDTO userRestDTO);
+	
+	List<SearchedRoomDTO> searchRoom(SearchRoomRestDTO searchRoomRestDTO);
 }
