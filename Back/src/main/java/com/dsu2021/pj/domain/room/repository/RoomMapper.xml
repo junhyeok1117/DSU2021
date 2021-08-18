@@ -14,13 +14,13 @@
         <select id="selectRoomByRoomIndex" resultType="room">
         	SELECT *
         	FROM room
-        	WHERE room_index = #{room_index}
+        	WHERE room_index = #{roomIndex}
         </select>
         
         <select id="selectRoomsByUserIndex" resultType="room">
         	SELECT *
         	FROM room
-        	WHERE user_index = #{user_index}
+        	WHERE user_index = #{userIndex}
         </select>
         
 </mapper>

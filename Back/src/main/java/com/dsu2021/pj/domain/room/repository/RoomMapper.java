@@ -15,11 +15,11 @@ import com.dsu2021.pj.domain.user.dto.UserRestDto;
 @Repository
 public interface RoomMapper {
 	
-	List<Room> selectAllRooms();
-	
 	Room selectRoomByRoomIndex(RoomRestDTO roomRestDTO);
 	
-	List<Room> selectRoomsByUserIndex(UserRestDto userRestDto);
+	//List<Room> selectRoomsByUserIndex(UserRestDto userRestDto);
 	
 	List<SearchedRoomDTO> searchRoom(SearchRoomRestDTO searchRoomRestDTO);
+
+	List<Room> selectAllRooms();
 }
