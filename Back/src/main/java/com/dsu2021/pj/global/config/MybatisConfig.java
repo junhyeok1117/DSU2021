@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@MapperScan(basePackages = "com.dsu2021.pj.domain") // repository에서 mapper 인터페이스로 처리
+@MapperScan(basePackages = "com.dsu2021.pj.domain.room.repository;") // repository에서 mapper 인터페이스로 처리
 public class MybatisConfig {
 	
 	@Bean
@@ -27,7 +27,8 @@ public class MybatisConfig {
 		return sqlSessionFactory.getObject();
 	}
 	
-	@Bean SqlSessionTemplate sqlSession (SqlSessionFactory sqlSessionFactory) {
+	@Bean
+	public SqlSessionTemplate sqlSession (SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 	

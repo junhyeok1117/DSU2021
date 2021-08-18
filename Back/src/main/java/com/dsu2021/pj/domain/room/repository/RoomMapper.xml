@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.dsu2021.pj.domain.room.mapper.RoomMapper">
+<mapper namespace="com.dsu2021.pj.domain.room.repository.RoomMapper">
 
         <select id="selectAllRooms" resultType="room">
         	SELECT *

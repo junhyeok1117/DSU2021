@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dsu2021.pj.domain.room.dto.DetailRoomDTO;
 import com.dsu2021.pj.domain.room.dto.SearchRoomRestDTO;
 import com.dsu2021.pj.domain.room.dto.SearchedRoomDTO;
+import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.room.service.RoomService;
+import com.dsu2021.pj.domain.room.service.impl.RoomServiceImpl;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -31,5 +33,9 @@ public class SearchController {
         return service.getDetailRoom(room_index);
     }
 	
+	@GetMapping("/testoo")
+	public ResponseEntity<List<Room>> test(){
+		return service.getAllRooms();
+	}
 
 }
