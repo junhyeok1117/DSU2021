@@ -8,7 +8,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class ReservationCancel {
-	private Long reservation_index;
+	private Long reservationIndex;
 	private Date date;
 	private String reason;
 }

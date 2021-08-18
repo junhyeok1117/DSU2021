@@ -6,6 +6,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class UserImagePath {
-	private Long user_index;
-	private String image_path;
+	private Long userIndex;
+	private String imagePath;
 }

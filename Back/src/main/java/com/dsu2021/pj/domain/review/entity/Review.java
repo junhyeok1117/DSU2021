@@ -7,9 +7,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 public class Review {
-    private Long room_index;
-    private Long user_index;
+    private Long roomIndex;
+    private Long userIndex;
     private String content;
-    private int star_rating;
-    private Date register_date;
+    private int starRating;
+    private Date registerDate;
 }

@@ -8,11 +8,11 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class User {
-    private Long user_index;
+    private Long userIndex;
 	private String name;
-	private String email;
+	private Long email;
 	private Date birthday;
 	private String phone;
-	private Date register_date;
+	private Date registerDate;
 	private String password;
 }

@@ -10,8 +10,8 @@ public class SearchRoomRestDTO {
 	private String kind;
 	private String si_do;
 	private String si_gun_gu;
-	private String check_in_date;
-	private String check_out_date;
+	private String checkinDate;
+	private String checkoutDate;
 	private String adult;
 	private String child;
 }

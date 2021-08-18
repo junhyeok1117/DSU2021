@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Host {
-	private Long user_index;
-	private Date start_date;
+	private Long userIndex;
+	private Date startDate;
 }

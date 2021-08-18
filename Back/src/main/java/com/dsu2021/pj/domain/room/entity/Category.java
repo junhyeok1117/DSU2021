@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Category {
-	private Long category_index;
+	private Long categoryIndex;
 	private String location;
 	private String kind;
 }

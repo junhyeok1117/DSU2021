@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class PaymentCancel {
-    private Long reservation_index;
-    private Date cancel_date;
-    private String cancel_reason;
+    private Long reservationIndex;
+    private Date cancelDate;
+    private String cancelReason;
 }
