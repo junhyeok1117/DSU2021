@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Wishlist {
-	private Long room_index;
-	private Long user_index;
-	private String wishlist_name;
+	private Long roomIndex;
+	private Long userIndex;
+	private String wishlistName;
 }

@@ -11,8 +11,8 @@ public class UserDto {
         유저 회원가입 요청 DTO
      */
     @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
+    //@NoArgsConstructor
+    //@AllArgsConstructor
     public static class UserSaveReq {
 
     }
@@ -21,8 +21,8 @@ public class UserDto {
      * 유저 정보 전달 DTO
      */
     @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
+    //@NoArgsConstructor
+    //@AllArgsConstructor
     public static class UserSelectRes {
         //클라이언트한테 확인용으로 던지는 값
 
