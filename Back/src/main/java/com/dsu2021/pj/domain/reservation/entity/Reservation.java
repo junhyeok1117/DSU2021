@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class Reservation {
 	private Long reservationindex;
-	private Long userindex;
+	private Long userIndex;
 	private Long roomIndex;
 	private String reservationState;
 	private int reservationPrice;
