@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class UserRestDto {
+public class UserResDto {
     private Long user_index;
 	private String name;
 	private String email;
