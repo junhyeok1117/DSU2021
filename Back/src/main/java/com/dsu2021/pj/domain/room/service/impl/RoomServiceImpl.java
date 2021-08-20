@@ -1,6 +1,7 @@
 package com.dsu2021.pj.domain.room.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,46 +28,65 @@ public class RoomServiceImpl implements RoomService{
 	private RoomMapper roomMapper;
 	
 	@Override
-	public ResponseEntity<List<SearchedRoomDTO>> searchRoom(SearchRoomRestDTO searchRoomRestDTO) {
+	public ResponseEntity<List<SearchedRoomDTO>> searchRoom(SearchRoomRestDTO searchRoomRestDTO) { // 미구현 기능 1) 체크인 체크아웃 검색 2) 위시리스트 정보 가져오기
 		
 		List<FilteredRoomDTO> filteredRooms;
 		
 		if(searchRoomRestDTO.getPage() == null || searchRoomRestDTO.getPage().equals("")) { // 페이지 파라미터 여부에 따라 다른 쿼리 호출
 		filteredRooms = roomMapper.filterRoom(searchRoomRestDTO);
 		}else {
+			searchRoomRestDTO.setPage((searchRoomRestDTO.getPage()-1)*10);
 			filteredRooms = roomMapper.filterRoomWithPage(searchRoomRestDTO);
 		}
-		//한번에 받을 수 있는 테이블 3개만 검색조건에 맞게 필터링해서 가져왔다.
+		//한번에 받을 수 있는 테이블 3개만 조인 후 검색조건에 맞게 필터링해서 가져옴
 		ArrayList<String> roomIndexs = new ArrayList<>();
 		ArrayList<ArrayList<String>> facilities = new ArrayList<>();
 		
-		for(FilteredRoomDTO room : filteredRooms) { // 시설은 String 배열로 만들어야 하기 때문에 반복문을 돌린다.
+		for(FilteredRoomDTO room : filteredRooms) { // 시설은 String 배열로 만들어야 하기 때문에 반복문을 돌림
 			roomIndexs.add(Long.toString(room.getRoomIndex()));
 			
 			ArrayList<String> facility = new ArrayList<>();
-			facility.add(room.getTv());
-			facility.add(room.getHairDryer());
-			facility.add(room.getFireExtinguisher());
-			facility.add(room.getRefrigerator());
-			facility.add(room.getMicrowave());
-			facility.add(room.getCookware());
-			facility.add(room.getPark());
-			facility.add(room.getAircon());
-			facility.add(room.getKitchen());
-			facility.add(room.getWifi());
-			facility.add(room.getWashingMachine());
+			if(room.getTv() != null && room.getTv().equals("true"))
+				{facility.add("TV");}
+			if(room.getHairDryer() != null && room.getHairDryer().equals("true"))
+				{facility.add("헤어드라이어");}
+			if(room.getFireExtinguisher() != null && room.getFireExtinguisher().equals("true"))
+				{facility.add("소화기");}
+			if(room.getRefrigerator() != null && room.getRefrigerator().equals("true"))
+				{facility.add("냉장고");}
+			if(room.getMicrowave() != null && room.getMicrowave().equals("true"))
+				{facility.add("전자레인지");}
+			if(room.getCookware() != null && room.getCookware().equals("true"))
+				{facility.add("조리도구");}
+			if(room.getPark() != null && room.getPark().equals("true"))
+				{facility.add("주차장");}
+			if(room.getAircon() != null && room.getAircon().equals("true"))
+				{facility.add("에어컨");}
+			if(room.getKitchen() != null && room.getKitchen().equals("true"))
+				{facility.add("주방");}
+			if(room.getWifi() != null && room.getWifi().equals("true"))
+				{facility.add("WIFI");}
+			if(room.getWashingMachine() != null && room.getWashingMachine().equals("true"))
+				{facility.add("세탁기");}
+			
 			facilities.add(facility);
 		}
-		// 여기서부턴 아직 받아오지 못한 이미지 경로, 별점, 리뷰수 등을 받기 시작한다.
+		// 여기서부턴 아직 받아오지 못한 이미지 경로, 별점, 리뷰수 등을 받기 시작
 		List<RoomImagePathDTO> roomImagePathDTOs = roomMapper.searchImagesByString(String.join(",",roomIndexs)); 
-		Map<Long, RoomImagePathDTO> pathMap = new HashMap<Long,RoomImagePathDTO>();
-		for(int i = 0 ; i<roomImagePathDTOs.size();i++) {
-			pathMap.put(roomImagePathDTOs.get(i).getRoomIndex(),roomImagePathDTOs.get(i));
-		}
-		String[] keys = pathMap.keySet().toArray(new String[pathMap.size()]);
-			
+		Map<Long, ArrayList<String>> pathMap = new HashMap<Long,ArrayList<String>>();
 		
-		List<List<ReviewStatisticDTO>> reviewStatistics = new ArrayList<>();
+		for( int i = 0 ; i < roomImagePathDTOs.size() ; i++ ) {
+			
+			if( !pathMap.containsKey(roomImagePathDTOs.get(i).getRoomIndex()) ) {
+				ArrayList<String> array = new ArrayList<>();
+				pathMap.put(roomImagePathDTOs.get(i).getRoomIndex(),array);
+			}
+			pathMap.get(roomImagePathDTOs.get(i).getRoomIndex()).add(roomImagePathDTOs.get(i).getImagePath());
+
+		}
+		
+		
+		List<ReviewStatisticDTO> reviewStatistics = new ArrayList<>();
 		for( String index : roomIndexs ) {
 			reviewStatistics.add(roomMapper.getReviewStatisticByRoomIndex(index));
 		}
@@ -76,16 +96,31 @@ public class RoomServiceImpl implements RoomService{
 		
 		for( int i = 0 ; i < roomIndexs.size() ; i++ ) {
 			SearchedRoomDTO room = new SearchedRoomDTO(
-					roomIndexs.get(i),
-					
+					filteredRooms.get(i).getRoomIndex(),
+					pathMap.get(filteredRooms.get(i).getRoomIndex()),
+					filteredRooms.get(i).getLocation(),
+					filteredRooms.get(i).getKind(),
+					filteredRooms.get(i).getName(),
+					filteredRooms.get(i).getMaxPerson(),
+					filteredRooms.get(i).getBed(),
+					filteredRooms.get(i).getBath(),
+					facilities.get(i),
+					reviewStatistics.get(i).getStarRating(),
+					reviewStatistics.get(i).getCount(),
+					false
 					);
+			rooms.add(room);
 		}
 		
-		return null;
+		return new ResponseEntity<List<SearchedRoomDTO>>(rooms,HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<DetailRoomDTO> getDetailRoom(String room_index) {
+		
+		
+		
+		
 		return null;
 	}
 	

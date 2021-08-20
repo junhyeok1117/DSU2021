@@ -9,6 +9,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ReviewStatisticDTO {
-	Integer starRating;
-	Float count;
+	Float starRating;
+	Integer count;
 }

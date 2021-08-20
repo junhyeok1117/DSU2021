@@ -11,16 +11,16 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class SearchedRoomDTO {
-	    private Long roomIndex;
-	    private List<String> imagePath;
-	    private String categoryLocation;
-	    private String categoryKind;
-	    private String roomName;
-	    private int maxPerson;
+	    private Long room_index;
+	    private List<String> image_path;
+	    private String category_location;
+	    private String category_kind;
+	    private String room_name;
+	    private int max_person;
 	    private int bed;
 	    private int bath;
 	    private List<String> facility;
-	    private float starRating;
-	    private int numberOfReviews;
-	    private boolean isWishlist;
+	    private float star_rating;
+	    private int number_of_reviews;
+	    private boolean is_wishlist;
 }

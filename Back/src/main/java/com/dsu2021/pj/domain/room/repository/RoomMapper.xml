@@ -30,9 +30,9 @@ FROM room INNER JOIN facility ON room.room_index = facility.room_index INNER JOI
 WHERE room.room_index IN
 (
 SELECT room_index FROM room WHERE
-room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '#{si_do}' AND si_gun_gu LIKE '%#{si_gun_gu}%')
-AND room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%location%' AND kind LIKE '%kind%')
-AND room.max_person LIKE '%#{max_person}%'
+room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '%${si_do}%' AND si_gun_gu LIKE '%${si_gun_gu}%')
+AND room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${location}%' AND kind LIKE '%${kind}%')
+AND room.max_person LIKE '%${max_person}%'
 )
 ORDER BY room.room_index DESC;
 		</select>
@@ -61,15 +61,15 @@ FROM room INNER JOIN facility ON room.room_index = facility.room_index INNER JOI
 WHERE room.room_index IN
 (
 SELECT room_index FROM room WHERE
-room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '#{si_do}' AND si_gun_gu LIKE '%#{si_gun_gu}%')
-AND room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%location%' AND kind LIKE '%kind%')
-AND room.max_person LIKE '%#{max_person}%'
+room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '%${si_do}%' AND si_gun_gu LIKE '%${si_gun_gu}%')
+AND room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${location}%' AND kind LIKE '%${kind}%')
+AND room.max_person LIKE '%${max_person}%'
 )
 ORDER BY room.room_index DESC
-LIMIT #{page},10;
+LIMIT ${page},10;
 		</select>
 		
-		<select id="searchImagesByString" resultType="roomImagePath">
+		<select id="searchImagesByString" resultType="roomImagePathDTO">
 			SELECT room_index roomIndex, image_number imageNumber, image_path imagePath 
 			FROM room_image_path 
 			WHERE room_index IN (#{indexes})
