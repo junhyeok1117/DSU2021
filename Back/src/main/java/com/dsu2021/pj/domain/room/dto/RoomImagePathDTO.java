@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Alias("roomImagePath")
+@Alias("roomImagePathDTO")
 @AllArgsConstructor
 @Getter
 public class RoomImagePathDTO {

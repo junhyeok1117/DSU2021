@@ -1,6 +1,7 @@
 package com.dsu2021.pj.domain.room.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,14 +60,20 @@ public class RoomServiceImpl implements RoomService{
 		}
 		// 여기서부턴 아직 받아오지 못한 이미지 경로, 별점, 리뷰수 등을 받기 시작한다.
 		List<RoomImagePathDTO> roomImagePathDTOs = roomMapper.searchImagesByString(String.join(",",roomIndexs)); 
-		Map<Long, RoomImagePathDTO> pathMap = new HashMap<Long,RoomImagePathDTO>();
-		for(int i = 0 ; i<roomImagePathDTOs.size();i++) {
-			pathMap.put(roomImagePathDTOs.get(i).getRoomIndex(),roomImagePathDTOs.get(i));
-		}
-		String[] keys = pathMap.keySet().toArray(new String[pathMap.size()]);
-			
+		Map<Long, ArrayList<String>> pathMap = new HashMap<Long,ArrayList<String>>();
 		
-		List<List<ReviewStatisticDTO>> reviewStatistics = new ArrayList<>();
+		for( int i = 0 ; i < roomImagePathDTOs.size() ; i++ ) {
+			
+			if( !pathMap.containsKey(roomImagePathDTOs.get(i).getRoomIndex()) ) {
+				ArrayList<String> array = new ArrayList<>();
+				pathMap.put(roomImagePathDTOs.get(i).getRoomIndex(),array);
+			}
+			pathMap.get(roomImagePathDTOs.get(i).getRoomIndex()).add(roomImagePathDTOs.get(i).getImagePath());
+
+		}
+		
+		
+		List<ReviewStatisticDTO> reviewStatistics = new ArrayList<>();
 		for( String index : roomIndexs ) {
 			reviewStatistics.add(roomMapper.getReviewStatisticByRoomIndex(index));
 		}
@@ -76,12 +83,23 @@ public class RoomServiceImpl implements RoomService{
 		
 		for( int i = 0 ; i < roomIndexs.size() ; i++ ) {
 			SearchedRoomDTO room = new SearchedRoomDTO(
-					roomIndexs.get(i),
-					
+					filteredRooms.get(i).getRoomIndex(),
+					pathMap.get(roomIndexs.get(i)),
+					filteredRooms.get(i).getLocation(),
+					filteredRooms.get(i).getKind(),
+					filteredRooms.get(i).getName(),
+					filteredRooms.get(i).getMaxPerson(),
+					filteredRooms.get(i).getBed(),
+					filteredRooms.get(i).getBath(),
+					facilities.get(i),
+					reviewStatistics.get(i).getStarRating(),
+					reviewStatistics.get(i).getCount(),
+					false
 					);
+			rooms.add(room);
 		}
 		
-		return null;
+		return new ResponseEntity<List<SearchedRoomDTO>>(rooms,HttpStatus.OK);
 	}
 
 	@Override
