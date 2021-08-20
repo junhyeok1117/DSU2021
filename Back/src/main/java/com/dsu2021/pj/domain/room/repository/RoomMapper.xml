@@ -65,8 +65,8 @@ room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do L
 AND room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${location}%' AND kind LIKE '%${kind}%')
 AND room.max_person LIKE '%${max_person}%'
 )
-ORDER BY room.room_index DESC;
-LIMIT #{page},10;
+ORDER BY room.room_index DESC
+LIMIT ${page},10;
 		</select>
 		
 		<select id="searchImagesByString" resultType="roomImagePathDTO">

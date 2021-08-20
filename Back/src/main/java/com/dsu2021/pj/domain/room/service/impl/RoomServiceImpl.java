@@ -28,20 +28,21 @@ public class RoomServiceImpl implements RoomService{
 	private RoomMapper roomMapper;
 	
 	@Override
-	public ResponseEntity<List<SearchedRoomDTO>> searchRoom(SearchRoomRestDTO searchRoomRestDTO) {
+	public ResponseEntity<List<SearchedRoomDTO>> searchRoom(SearchRoomRestDTO searchRoomRestDTO) { // 미구현 기능 1) 체크인 체크아웃 검색 2) 위시리스트 정보 가져오기
 		
 		List<FilteredRoomDTO> filteredRooms;
 		
 		if(searchRoomRestDTO.getPage() == null || searchRoomRestDTO.getPage().equals("")) { // 페이지 파라미터 여부에 따라 다른 쿼리 호출
 		filteredRooms = roomMapper.filterRoom(searchRoomRestDTO);
 		}else {
+			searchRoomRestDTO.setPage((searchRoomRestDTO.getPage()-1)*10);
 			filteredRooms = roomMapper.filterRoomWithPage(searchRoomRestDTO);
 		}
-		//한번에 받을 수 있는 테이블 3개만 검색조건에 맞게 필터링해서 가져왔다.
+		//한번에 받을 수 있는 테이블 3개만 조인 후 검색조건에 맞게 필터링해서 가져옴
 		ArrayList<String> roomIndexs = new ArrayList<>();
 		ArrayList<ArrayList<String>> facilities = new ArrayList<>();
 		
-		for(FilteredRoomDTO room : filteredRooms) { // 시설은 String 배열로 만들어야 하기 때문에 반복문을 돌린다.
+		for(FilteredRoomDTO room : filteredRooms) { // 시설은 String 배열로 만들어야 하기 때문에 반복문을 돌림
 			roomIndexs.add(Long.toString(room.getRoomIndex()));
 			
 			ArrayList<String> facility = new ArrayList<>();
@@ -58,7 +59,7 @@ public class RoomServiceImpl implements RoomService{
 			facility.add(room.getWashingMachine());
 			facilities.add(facility);
 		}
-		// 여기서부턴 아직 받아오지 못한 이미지 경로, 별점, 리뷰수 등을 받기 시작한다.
+		// 여기서부턴 아직 받아오지 못한 이미지 경로, 별점, 리뷰수 등을 받기 시작
 		List<RoomImagePathDTO> roomImagePathDTOs = roomMapper.searchImagesByString(String.join(",",roomIndexs)); 
 		Map<Long, ArrayList<String>> pathMap = new HashMap<Long,ArrayList<String>>();
 		
@@ -84,7 +85,7 @@ public class RoomServiceImpl implements RoomService{
 		for( int i = 0 ; i < roomIndexs.size() ; i++ ) {
 			SearchedRoomDTO room = new SearchedRoomDTO(
 					filteredRooms.get(i).getRoomIndex(),
-					pathMap.get(roomIndexs.get(i)),
+					pathMap.get(filteredRooms.get(i).getRoomIndex()),
 					filteredRooms.get(i).getLocation(),
 					filteredRooms.get(i).getKind(),
 					filteredRooms.get(i).getName(),
@@ -104,6 +105,10 @@ public class RoomServiceImpl implements RoomService{
 
 	@Override
 	public ResponseEntity<DetailRoomDTO> getDetailRoom(String room_index) {
+		
+		
+		
+		
 		return null;
 	}
 	

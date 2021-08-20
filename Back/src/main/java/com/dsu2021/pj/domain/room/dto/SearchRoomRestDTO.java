@@ -14,4 +14,8 @@ public class SearchRoomRestDTO {
 	private String check_out_date;
 	private String max_person;
 	private Integer page;
+	
+	public void setPage(Integer page) {
+		this.page = page;
+	}
 }
