@@ -35,7 +35,7 @@ public class RoomServiceImpl implements RoomService{
 		if(searchRoomRestDTO.getPage() == null || searchRoomRestDTO.getPage().equals("")) { // 페이지 파라미터 여부에 따라 다른 쿼리 호출
 		filteredRooms = roomMapper.filterRoom(searchRoomRestDTO);
 		}else {
-			searchRoomRestDTO.setPage((searchRoomRestDTO.getPage()-1)*10);
+			searchRoomRestDTO.setPage((Integer)((searchRoomRestDTO.getPage().intValue()-1)*10));
 			filteredRooms = roomMapper.filterRoomWithPage(searchRoomRestDTO);
 		}
 		//한번에 받을 수 있는 테이블 3개만 조인 후 검색조건에 맞게 필터링해서 가져옴
