@@ -13,7 +13,7 @@ public class User {
     private Long userIndex;
 	private String name;
 	private String email;
-	private Date birthday;
+	private String birthday;
 	private String phone;
 	private Date registerDate;
 	private String password;
