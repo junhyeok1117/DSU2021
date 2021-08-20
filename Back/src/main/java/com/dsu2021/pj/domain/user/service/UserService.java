@@ -1,6 +1,5 @@
 package com.dsu2021.pj.domain.user.service;
 
-import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.user.dto.UserDto;
 import com.dsu2021.pj.domain.user.dto.UserResDto;
 import com.dsu2021.pj.domain.user.entity.User;
@@ -34,6 +33,7 @@ public class UserService {
 
 //      2. 전체 user 조회
         AllUsers = getAllUsers();
+        log.info("check");
 
 //      3. 입력 값과 비교
         for(User user : AllUsers){
