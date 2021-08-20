@@ -12,7 +12,7 @@ import org.apache.ibatis.type.Alias;
 public class User {
     private Long userIndex;
 	private String name;
-	private Long email;
+	private String email;
 	private Date birthday;
 	private String phone;
 	private Date registerDate;

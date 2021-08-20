@@ -9,6 +9,7 @@ import com.dsu2021.pj.domain.user.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -16,7 +17,7 @@ import java.util.List;
 public interface UserMapper {
 
 	//User 전체 조회
-	List<User> getAllUsers();
+	ArrayList<User> getAllUsers();
 
 	//User 추가
 	User addUser(UserDto userDto);

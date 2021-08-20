@@ -28,7 +28,7 @@ public class UserController {
 
 
     //로그인 요청
-    @PostMapping("/signIn")
+    @GetMapping("/signIn")
     public ResponseEntity<UserDto> signIn (HttpSession session, UserDto.SignIn signIn){
         return userService.checkUser(session, signIn);
     }

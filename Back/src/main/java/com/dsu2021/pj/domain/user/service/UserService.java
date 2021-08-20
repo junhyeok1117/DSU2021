@@ -6,7 +6,6 @@ import com.dsu2021.pj.domain.user.dto.UserResDto;
 import com.dsu2021.pj.domain.user.entity.User;
 import com.dsu2021.pj.domain.user.repository.UserMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +38,7 @@ public class UserService {
 //      3. 입력 값과 비교
         for(User user : AllUsers){
             if (!user.getEmail().equals(signIn.getEmail())) {
-//                log.info();
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
             }
             session.setAttribute("email", signIn.getEmail());
