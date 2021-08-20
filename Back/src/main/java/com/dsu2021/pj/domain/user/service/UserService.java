@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -26,28 +29,35 @@ public class UserService {
     private UserMapper userMapper;
 
     //로그인
-    public ResponseEntity<UserDto> checkUser (@ModelAttribute UserDto.SignIn signIn) {//1. 클라이언트의 입력값 저장
+    public ResponseEntity<UserDto> checkUser (HttpSession session, @ModelAttribute UserDto.SignIn signIn) {//1. 클라이언트의 입력값 저장
         log.info("email : {}, password = {}", signIn.getEmail(), signIn.getPassword() );//입력값 로그로 확인
 
-        AllUsers = (List<User>) getAllUsers();
+
 //      2. 전체 user 조회
-        if (signIn.getEmail().equals(AllUsers(email).getEmail)) {
+        AllUsers = getAllUsers();
+
+//      3. 입력 값과 비교
+        for(User user : AllUsers){
+            if (!user.getEmail().equals(signIn.getEmail())) {
+//                log.info();
+                return new ResponseEntity<>(HttpStatus.OK);
+
+            }
+            session.setAttribute("email", signIn.getEmail());
 
         }
 
-
-
-//      3. 입력 값과 비교
 //      4. 일치 시 id값만 프런트에 전달(확인용)
 
-
         return null;
+
+//        return new ResponseEntity<>(roomMapper.selectAllRooms(),HttpStatus.ACCEPTED);
 
     }
 
     //전체 user 조회
-    public ResponseEntity<List<User>> getAllUsers(){
-        return new ResponseEntity<>(userMapper.getAllUsers(), HttpStatus.ACCEPTED);
+    public List<User> getAllUsers(){
+        return userMapper.getAllUsers();
     }
 
 

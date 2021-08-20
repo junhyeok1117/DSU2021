@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,8 +29,8 @@ public class UserController {
 
     //로그인 요청
     @PostMapping("/signIn")
-    public ResponseEntity<UserDto> signIn(UserDto userDto){
-        return userService.checkUser(userDto);
+    public ResponseEntity<UserDto> signIn (HttpSession session, UserDto.SignIn signIn){
+        return userService.checkUser(session, signIn);
     }
 
 
