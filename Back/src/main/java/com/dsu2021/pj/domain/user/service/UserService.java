@@ -20,15 +20,18 @@ import java.util.List;
 @Slf4j
 @Service
 public class UserService {
+    List<User> AllUsers;
 
     @Autowired
     private UserMapper userMapper;
 
+    //로그인
     public ResponseEntity<UserDto> checkUser (@ModelAttribute UserDto.SignIn signIn) {//1. 클라이언트의 입력값 저장
-        log.info("email : {}, password = {}", signIn.getEmail(), signIn.getPassword() );
+        log.info("email : {}, password = {}", signIn.getEmail(), signIn.getPassword() );//입력값 로그로 확인
 
+        AllUsers = (List<User>) getAllUsers();
 //      2. 전체 user 조회
-        if (signIn.getEmail().equals(getAllUsers(email).getEmail)) {
+        if (signIn.getEmail().equals(AllUsers(email).getEmail)) {
 
         }
 
