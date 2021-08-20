@@ -46,17 +46,17 @@ public class RoomServiceImpl implements RoomService{
 			roomIndexs.add(Long.toString(room.getRoomIndex()));
 			
 			ArrayList<String> facility = new ArrayList<>();
-			facility.add(room.getTv());
-			facility.add(room.getHairDryer());
-			facility.add(room.getFireExtinguisher());
-			facility.add(room.getRefrigerator());
-			facility.add(room.getMicrowave());
-			facility.add(room.getCookware());
-			facility.add(room.getPark());
-			facility.add(room.getAircon());
-			facility.add(room.getKitchen());
-			facility.add(room.getWifi());
-			facility.add(room.getWashingMachine());
+			if(room.getTv() != null && room.getTv().equals("true")) {facility.add("TV");}
+			if(room.getHairDryer() != null && room.getHairDryer().equals("true")) {facility.add("헤어드라이어");}
+			if(room.getFireExtinguisher() != null && room.getFireExtinguisher().equals("true")) {facility.add("소화기");}
+			if(room.getRefrigerator() != null && room.getRefrigerator().equals("true")) {facility.add("냉장고");}
+			if(room.getMicrowave() != null && room.getMicrowave().equals("true")) {facility.add("전자레인지");}
+			if(room.getCookware() != null && room.getCookware().equals("true")) {facility.add("조리도구");}
+			if(room.getPark() != null && room.getPark().equals("true")) {facility.add("주차장");}
+			if(room.getAircon() != null && room.getAircon().equals("true")) {facility.add("에어컨");}
+			if(room.getKitchen() != null && room.getKitchen().equals("true")) {facility.add("주방");}
+			if(room.getWifi() != null && room.getWifi().equals("true")) {facility.add("WIFI");}
+			if(room.getWashingMachine() != null && room.getWashingMachine().equals("true")) {facility.add("세탁기");}
 			facilities.add(facility);
 		}
 		// 여기서부턴 아직 받아오지 못한 이미지 경로, 별점, 리뷰수 등을 받기 시작
