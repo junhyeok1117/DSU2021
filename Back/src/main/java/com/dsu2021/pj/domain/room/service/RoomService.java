@@ -1,19 +1,31 @@
 package com.dsu2021.pj.domain.room.service;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.dsu2021.pj.domain.room.dto.RoomDTO;
+import com.dsu2021.pj.domain.room.repository.RoomMapper;
+import com.dsu2021.pj.domain.room.service.RoomService;
 
-import org.springframework.http.ResponseEntity;
-
-import com.dsu2021.pj.domain.room.dto.DetailRoomDTO;
-import com.dsu2021.pj.domain.room.dto.SearchRoomRestDTO;
-import com.dsu2021.pj.domain.room.dto.SearchedRoomDTO;
-import com.dsu2021.pj.domain.room.entity.Room;
-
-public interface RoomService {
+@Service
+public class RoomService{
 	
-	public ResponseEntity<List<SearchedRoomDTO>> searchRoom(SearchRoomRestDTO searchRoomRestDTO);
+	@Autowired
+	private RoomMapper roomMapper;
 	
-	public ResponseEntity<DetailRoomDTO> getDetailRoom(String room_index);
+	public List<RoomDTO.RoomRes> get15RoomsByPage(Integer page){
+		Integer index = ( page - 1 ) * 15;
+		List<RoomDTO.RoomRes> rooms = roomMapper.get15RoomsByIndex(index);
+		return rooms;
+	}
 	
-	public ResponseEntity<List<Room>> getAllRooms();
+	public List<RoomDTO.RoomRes> search15Rooms(Integer page, RoomDTO.RoomReq req){
+		List<RoomDTO.RoomRes> rooms = roomMapper.search15Rooms(page,req);
+		return rooms;
+	}
+	
+	public RoomDTO.RoomRes getRoomByIndex(Long roomIndex){
+		RoomDTO.RoomRes room = roomMapper.getRoomByIndex(roomIndex);
+		return room;
+	}
 }
