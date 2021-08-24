@@ -18,6 +18,29 @@ public class RoomDTO {
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
+	public static class RoomHostReq{
+		
+		// 작업 중
+		
+		private Integer bed;
+		private Integer bath;
+		private String tv;
+		private String hairDryer;
+		private String fireExtinguisher;
+		private String refrigerator;
+		private String microwave;
+		private String cookware;
+		private String park;
+		private String aircon;
+		private String kitchen;
+		private String wifi;
+		private String washingMachine;
+		
+	}
+	
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class RoomReq{
 		private String location="";
 		private String kind="";
@@ -54,4 +77,7 @@ public class RoomDTO {
 		private String content;
 	}
 
+	
+	
+	
 }

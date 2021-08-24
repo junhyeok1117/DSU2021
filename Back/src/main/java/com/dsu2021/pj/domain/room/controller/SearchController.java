@@ -18,7 +18,7 @@ import com.dsu2021.pj.domain.room.service.RoomService;
 public class SearchController {
 	
 	@Autowired
-	RoomService service;
+	private RoomService service;
 	
 	@GetMapping("/rooms/page/{page}")
     public ResponseEntity<List<RoomDTO.RoomRes>> getRoomsByPage(@PathVariable("page") Integer page, @ModelAttribute RoomDTO.RoomReq req){
