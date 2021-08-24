@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan(basePackages = {"com.dsu2021.pj.domain"},annotationClass = org.apache.ibatis.annotations.Mapper.class) // repository에서 mapper 인터페이스로 처리
 public class MybatisConfig {
-	
+
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();

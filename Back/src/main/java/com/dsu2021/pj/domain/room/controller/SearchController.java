@@ -25,11 +25,7 @@ public class SearchController {
         
 		List<RoomDTO.RoomRes> rooms;
 		
-		if(req == null)
-			rooms = service.get15RoomsByPage(page);
-		else {
-			rooms = service.search15Rooms(page,req);
-		}
+		rooms = service.search15Rooms(page,req);
 		
 		return new ResponseEntity<>(rooms,HttpStatus.OK);
     }

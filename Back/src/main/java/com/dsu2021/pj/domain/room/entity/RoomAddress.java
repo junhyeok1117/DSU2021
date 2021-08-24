@@ -15,6 +15,4 @@ public class RoomAddress {
 	private String eup_myeon_dong;
 	private String road_name;
 	private String detailAddress;
-	private float latitude;
-	private float longitude;
 }
