@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dsu2021.pj.domain.review.repository.ReviewMapper">
+
+	<resultMap
+		type="com.dsu2021.pj.domain.review.dto.ReviewDTO$ReviewRes" id="reviewResult">
+		<id property="" column=""></id>
+		<result property="" column=""></result>
+		<result property="" column=""></result>
+		<result property="" column=""></result>
+		<result property="" column=""></result>
+		<result property="" column=""></result>
+		<result property="" column=""></result>
+		<result property="" column=""></result>
+		<result property="" column=""></result>
+	</resultMap>
+	
+	<select id ="getReviewsByRoomIndex" resultMap="reviewResult">
+		SELECT * FROM review WHERE room_index = #{roomIndex};
+	</select>
+	
+	<select id ="getReviewsByUserIndex" resultMap="reviewResult">
+		SELECT * FROM review WHERE user_index = #{userIndex};
+	</select>
+
+</mapper>
