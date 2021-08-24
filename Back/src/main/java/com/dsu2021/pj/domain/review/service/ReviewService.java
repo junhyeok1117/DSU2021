@@ -17,13 +17,13 @@ public class ReviewService {
 	public List<ReviewRes> getReviewsByRoomIndex(Long roomIndex) {
 		List<ReviewRes> reviews;
 		reviews = reviewMapper.getReviewsByRoomIndex(roomIndex);
-		return null;
+		return reviews;
 	}
 
 	public List<ReviewRes> getReviewsByUserIndex(Long userIndex) {
 		List<ReviewRes> reviews;
-		
-		return null;
+		reviews = reviewMapper.getReviewsByUserIndex(userIndex);
+		return reviews;
 	}
 	
 	

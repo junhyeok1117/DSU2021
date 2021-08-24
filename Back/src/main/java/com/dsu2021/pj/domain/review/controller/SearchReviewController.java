@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dsu2021.pj.domain.review.dto.ReviewDTO;
@@ -14,13 +15,13 @@ import com.dsu2021.pj.domain.review.service.ReviewService;
 
 @CrossOrigin(origins="*")
 @RestController
-public class SearchController {
+public class SearchReviewController {
 	
 	@Autowired
 	private ReviewService service;
 	
 	@GetMapping("/rooms/{roomIndex}/reviews")
-	public ResponseEntity<List<ReviewDTO.ReviewRes>> getReviewsByRoomIndex(Long roomIndex){
+	public ResponseEntity<List<ReviewDTO.ReviewRes>> getReviewsByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
 		
 		List<ReviewDTO.ReviewRes> reviews = service.getReviewsByRoomIndex(roomIndex);
 		
@@ -28,7 +29,7 @@ public class SearchController {
 	}
 	
 	@GetMapping("/users/{userIndex}/reviews")
-	public ResponseEntity<List<ReviewDTO.ReviewRes>> getReviewsByUserIndex(Long userIndex){
+	public ResponseEntity<List<ReviewDTO.ReviewRes>> getReviewsByUserIndex(@PathVariable("userIndex") Long userIndex){
 		
 		List<ReviewDTO.ReviewRes> reviews = service.getReviewsByUserIndex(userIndex);
 		

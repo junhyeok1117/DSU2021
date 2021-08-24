@@ -8,15 +8,11 @@
 
 	<resultMap
 		type="com.dsu2021.pj.domain.review.dto.ReviewDTO$ReviewRes" id="reviewResult">
-		<id property="" column=""></id>
-		<result property="" column=""></result>
-		<result property="" column=""></result>
-		<result property="" column=""></result>
-		<result property="" column=""></result>
-		<result property="" column=""></result>
-		<result property="" column=""></result>
-		<result property="" column=""></result>
-		<result property="" column=""></result>
+		<id property="roomIndex" column="room_index"></id>
+		<id property="userIndex" column="user_index"></id>
+		<result property="content" column="content"></result>
+		<result property="starRating" column="star_rating"></result>
+		<result property="registerDate" column="register_date"></result>
 	</resultMap>
 	
 	<select id ="getReviewsByRoomIndex" resultMap="reviewResult">

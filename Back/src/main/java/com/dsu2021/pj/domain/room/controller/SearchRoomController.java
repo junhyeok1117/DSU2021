@@ -15,7 +15,7 @@ import com.dsu2021.pj.domain.room.service.RoomService;
 
 @CrossOrigin(origins="*")
 @RestController
-public class SearchController {
+public class SearchRoomController {
 	
 	@Autowired
 	private RoomService service;
