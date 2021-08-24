@@ -6,107 +6,43 @@
 
 <mapper namespace="com.dsu2021.pj.domain.room.repository.RoomMapper">
 
-		<select id="filterRoom" resultType="filteredRoom">
-SELECT 
-room.room_index roomIndex,
-room.name name,
-room.max_person maxPerson,
-facility.bed bed,
-facility.bath bath,
-facility.tv tv,
-facility.hair_dryer hairDryer,
-facility.fire_extinguisher fireExtinguisher,
-facility.refrigerator refrigerator,
-facility.microwave microwave,
-facility.cookware cookware,
-facility.park park,
-facility.aircon aircon,
-facility.kitchen kitchen,
-facility.wifi wifi,
-facility.washing_machine washingMachine,
-category.location location,
-category.kind kind
-FROM room INNER JOIN facility ON room.room_index = facility.room_index INNER JOIN category ON room.category_index = category.category_index
-WHERE room.room_index IN
-(
-SELECT room_index FROM room WHERE
-room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '%${si_do}%' AND si_gun_gu LIKE '%${si_gun_gu}%')
-AND room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${location}%' AND kind LIKE '%${kind}%')
-AND room.max_person LIKE '%${max_person}%'
-)
-ORDER BY room.room_index DESC;
-		</select>
-		
-		<select id="filterRoomWithPage" resultType="filteredRoom">
-SELECT 
-room.room_index roomIndex,
-room.name name,
-room.max_person maxPerson,
-facility.bed bed,
-facility.bath bath,
-facility.tv tv,
-facility.hair_dryer hairDryer,
-facility.fire_extinguisher fireExtinguisher,
-facility.refrigerator refrigerator,
-facility.microwave microwave,
-facility.cookware cookware,
-facility.park park,
-facility.aircon aircon,
-facility.kitchen kitchen,
-facility.wifi wifi,
-facility.washing_machine washingMachine,
-category.location location,
-category.kind kind
-FROM room INNER JOIN facility ON room.room_index = facility.room_index INNER JOIN category ON room.category_index = category.category_index
-WHERE room.room_index IN
-(
-SELECT room_index FROM room WHERE
-room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '%${si_do}%' AND si_gun_gu LIKE '%${si_gun_gu}%')
-AND room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${location}%' AND kind LIKE '%${kind}%')
-AND room.max_person LIKE '%${max_person}%'
-)
-ORDER BY room.room_index DESC
-LIMIT ${page},10;
-		</select>
-		
-		<select id="searchImagesByString" resultType="roomImagePathDTO">
-			SELECT room_index roomIndex, image_number imageNumber, image_path imagePath 
-			FROM room_image_path 
-			WHERE room_index IN (#{indexes})
-			ORDER BY room_index DESC, image_number;
-		</select>
-		
-		<select id="getReviewStatisticByRoomIndex" resultType="reviewStatistic">
-			SELECT AVG(star_rating) starRating, COUNT(star_rating) count 
-			FROM (SELECT * FROM review WHERE room_index = #{index}) a;
-		</select>
-		
-		<select id="isWishListedByRoomId" resultType="boolean">
-			
-		</select>
-		
-		
-		
-		
-		
-		
-	
+	<resultMap type="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes" id="roomResult">
+		<id property="roomIndex" column="room_index"></id>
+		<result property="userIndex" column="user_index"></result>
+		<result property="addressIndex" column="address_index"></result>
+		<result property="categoryIndex" column="category_index"></result>
+		<result property="name" column="name"></result>
+		<result property="price" column="price"></result>
+		<result property="cleanPrice" column="clean_price"></result>
+		<result property="maxPerson" column="max_person"></result>
+		<result property="content" column="content"></result>
+	</resultMap>
 
-        <select id="selectAllRooms" resultType="room">
-        	SELECT *
-        	FROM room
-        </select>
-        
-        <select id="selectRoomByRoomIndex" resultType="room">
-        	SELECT *
-        	FROM room
-        	WHERE room_index in (#{roomIndex}) 
-        </select>
-        
-        <select id="selectRoomsByUserIndex" resultType="room">
-        	SELECT *
-        	FROM room
-        	WHERE user_index = #{userIndex}
-        </select>
-        
+		<select id="search15Rooms" resultMap="roomResult">
+			SELECT *
+			FROM room 
+			WHERE room_index IN
+			(
+				SELECT room_index FROM room WHERE
+				room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${req.location}%' AND kind LIKE '%${req.kind}%')
+				AND room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '%${req.siDo}%' AND si_gun_gu LIKE '%${req.siGunGu}%')
+				AND room.room_index IN (SELECT available_date.room_index FROM available_date WHERE date BETWEEN #{req.checkInDate} AND #{req.checkOutDate} GROUP BY room_index HAVING COUNT(room_index) >= ${differenceDay})
+				AND room.max_person > ${req.maxPerson}
+			)
+			ORDER BY room.room_index DESC
+			LIMIT ${index},15;
+		</select>
+
+        <select id="getRoomByIndex" resultMap="roomResult">
+			SELECT * FROM room WHERE room_index = #{roomIndex};
+		</select>		
+		
+		
+		
+		
+		
+
+		<select id="get15RoomsByIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes">
+			SELECT * FROM room ORDER BY room_index DESC LIMIT ${index},15;
+		</select>
 </mapper>
