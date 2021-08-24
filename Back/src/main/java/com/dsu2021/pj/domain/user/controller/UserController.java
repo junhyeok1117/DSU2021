@@ -1,23 +1,19 @@
 package com.dsu2021.pj.domain.user.controller;
-import com.dsu2021.pj.domain.room.dto.SearchRoomRestDTO;
-import com.dsu2021.pj.domain.room.dto.SearchedRoomDTO;
+
 import com.dsu2021.pj.domain.user.dto.UserDto;
-import com.dsu2021.pj.domain.user.dto.UserResDto;
 import com.dsu2021.pj.domain.user.entity.User;
 import com.dsu2021.pj.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/v1")
 public class UserController {
 
     private final UserService userService;
@@ -26,12 +22,28 @@ public class UserController {
 //    @PostMapping("/signUp")
 
 
-
     //로그인 요청
-    @GetMapping("/signIn")
-    public ResponseEntity<UserDto> signIn (HttpSession session, UserDto.SignIn signIn){
-        return userService.checkUser(session, signIn);
+    @PostMapping("/signIn")
+    public ResponseEntity<UserDto.UserCheckEmail> signIn(HttpSession session, @ModelAttribute UserDto.SignInReq signInReq) {
+
+        UserDto.UserCheckEmail userCheckEmail = userService.checkUser(signInReq);
+
+        session.setAttribute("email", userCheckEmail.getEmail());
+
+        return new ResponseEntity<UserDto.UserCheckEmail>(userCheckEmail, HttpStatus.OK);
+
     }
+
+    // 로그인 요청
+//    @PostMapping("/signIn")
+//    public ResponseEntity<UserDto.UserIdRes> signIn(HttpSession session, @ModelAttribute UserDto.UserSignIn dto) {
+//
+//        UserDto.UserSignRes userRes = userService.userSignIn(dto);
+//
+//        session.setAttribute(userRes.getEmail(), "email");
+//
+//        return new ResponseEntity<UserDto.UserIdRes>(userRes, HttpStatus.OK);
+//    }
 
 
 //    @PostMapping
