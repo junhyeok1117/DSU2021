@@ -48,9 +48,9 @@ public class RoomDTO {
 		private Long addressIndex;
 		private Long categoryIndex;
 		private String name;
-		private int price;
-		private int cleanPrice;
-		private int maxPerson;
+		private Integer price;
+		private Integer cleanPrice;
+		private Integer maxPerson;
 		private String content;
 	}
 

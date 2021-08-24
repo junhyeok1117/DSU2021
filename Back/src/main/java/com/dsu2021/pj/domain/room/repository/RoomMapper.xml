@@ -33,7 +33,7 @@
 			LIMIT ${index},15;
 		</select>
 
-        <select id="getRoomByIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes">
+        <select id="getRoomByIndex" resultMap="roomResult">
 			SELECT * FROM room WHERE room_index = #{roomIndex};
 		</select>		
 		
