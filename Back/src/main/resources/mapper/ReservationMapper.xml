@@ -7,7 +7,7 @@
 <mapper namespace="com.dsu2021.pj.domain.reservation.repository.RservationMapper">
 
 	<resultMap 
-		type="com.dsu2021.pj.domain.rerservation.dto.ReservationDTO$ReservationRes" id="reservationResult">
+		type="com.dsu2021.pj.domain.reservation.dto.ReservationDTO$ReservationRes" id="reservationResult">
 		<id property="reservationindex" column="reservation_index"></id>
 		<result property="userIndex" column="user_index"></result>
 		<result property="roomIndex" column="room_index"></result>
