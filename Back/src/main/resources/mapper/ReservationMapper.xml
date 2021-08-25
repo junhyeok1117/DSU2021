@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dsu2021.pj.domain.review.repository.RservationMapper">
+
+	<resultMap
+		type="com.dsu2021.pj.domain.rerservation.dto.ReservationDTO$ReservationRes" id="reservationResult">
+		<id property="roomIndex" column="reservation_index"></id>
+		<result property="userIndex" column="user_index"></result>
+		<result property="content" column="room_index"></result>
+		<result property="starRating" column="reservation_state"></result>
+		<result property="registerDate" column="check_in_date"></result>
+		<result property="registerDate" column="check_out_date"></result>
+		<result property="registerDate" column="reservation_date"></result>
+	</resultMap>
+	
+	<select id ="getReservationByIndex" resultMap="reservationResult">
+
+	</select>
+	
+
+</mapper>
