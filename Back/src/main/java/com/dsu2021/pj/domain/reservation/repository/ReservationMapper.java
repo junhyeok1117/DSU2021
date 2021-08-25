@@ -1,4 +1,4 @@
-package com.dsu2021.pj.domain.reservation.service;
+package com.dsu2021.pj.domain.reservation.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
