@@ -6,14 +6,18 @@
 
 <mapper namespace="com.dsu2021.pj.domain.user.repository.UserMapper">
 
-        <select id="getAllUsers" resultType="User">
-        	SELECT * FROM user
-        </select>
-        
-        <insert id="addUser">
-            insert into user (name, email, birthday, phone, password)
-                        value (#{name}, #{email}, #{birthday}, #{phoneNum}, #{password});
-        </insert>
-        
+    <select id="getAllUsers" resultType="User">
+        SELECT * FROM user
+    </select>
+
+    <select id="getUsers" resultType="User">
+        SELECT email, password FROM user
+    </select>
+
+    <insert id="addUser">
+        insert into user (name, email, birthday, phone, password)
+        value (#{name}, #{email}, #{birthday}, #{phoneNum}, #{password});
+    </insert>
+
 
 </mapper>

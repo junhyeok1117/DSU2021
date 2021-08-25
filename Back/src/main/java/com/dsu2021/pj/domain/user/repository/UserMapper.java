@@ -11,15 +11,13 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-	//User 전체 조회
-	List<User> getAllUsers();
+    //	User 전체 조회
+    List<User> getAllUsers();
 
-	//User 추가
-	User addUser(UserDto userDto);
-	
-	//List<Room> selectRoomsByUserIndex(UserRestDto userRestDto);
-	
-//	List<SearchedRoomDTO> searchRoom(SearchRoomRestDTO searchRoomRestDTO);
+    //	User 로그인 시 email과 password 조회
+    List<User> getUsers();
 
+    //	User 추가
+    User addUser(UserDto userDto);
 
 }
