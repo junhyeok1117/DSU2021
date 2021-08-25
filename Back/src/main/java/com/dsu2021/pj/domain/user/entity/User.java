@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.ibatis.type.Alias;
 
-@Alias("User")//mybatis에서 패키지 전체 입력을 대신하는 별칭
 @AllArgsConstructor
 @Getter
 public class User {
