@@ -30,20 +30,18 @@ public class UserService {
         for (User user : AllUsers) {
             if (!user.getEmail().equals(signInReq.getEmail())) {
                 log.info("email error");
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);//입력값과 일치하는 email이 없다 exception 발생시켜야함
+//               controllerAdvice로 전달 , exception 발생시켜야함
             } else if (!user.getPassword().equals(signInReq.getPassword())) {
                 log.info("password error");
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);//입력값과 일치하는 password가 없다 exception 발생시켜야함
+//               controllerAdvice로 전달 , exception 발생시켜야함
             } else {
 //              4. 일치 시 id값만 프런트에 전달(확인용)
                 UserDto.UserCheckEmail checkEmail = new UserDto.UserCheckEmail();
                 checkEmail.setEmail(signInReq.getEmail());
 
-                return checkEmail; //입력값 email과 password가 일치하는 경우
+                return checkEmail;
             }
-
         }
-        UserDto.UserCheckEmail userCheckEmail;
         return null;
     }
 
