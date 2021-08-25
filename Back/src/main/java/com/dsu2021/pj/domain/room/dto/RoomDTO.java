@@ -3,6 +3,9 @@ package com.dsu2021.pj.domain.room.dto;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,9 +22,15 @@ public class RoomDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class RoomHostReq{
-		
-		// 작업 중
-		
+		//RoomAddress
+		private String siDo;
+		private String siGunGu;
+		private String eupMyeonDong;
+		private String roadName;
+		private String detailAddress;
+		//RoomImagePath
+		private Image_path image_path;
+		//facility
 		private Integer bed;
 		private Integer bath;
 		private String tv;
@@ -35,7 +44,24 @@ public class RoomDTO {
 		private String kitchen;
 		private String wifi;
 		private String washingMachine;
-		
+		//information
+		private String selfCheckIn;
+		private String commonSolo;
+		//availableDate
+		@JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Seoul")
+		@DateTimeFormat(pattern="yyyyMMdd")
+		private Date[] date;
+		//category
+		private String location;
+		private String kind;
+		//room
+	}
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class Image_path{
+		private int imageNumber;
+		private String imagePath;
 	}
 	
 	@Data
@@ -46,7 +72,9 @@ public class RoomDTO {
 		private String kind="";
 		private String siDo="";
 		private String siGunGu="";
+		@DateTimeFormat(pattern="yyyyMMdd")
 		private Date checkInDate;
+		@DateTimeFormat(pattern="yyyyMMdd")
 		private Date checkOutDate;
 		private Integer maxPerson=0;
 		
