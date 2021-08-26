@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
@@ -23,8 +22,12 @@ public class InsertRoomController {
 	@PostMapping("/rooms")
 	public ResponseEntity<?> insertRoom(@RequestBody RoomDTO.RoomHostReq req){
 		
+		RoomDTO.RoomHostRes res =  service.insertRoom(req);
 		
-		
-		return new ResponseEntity<>(req,HttpStatus.OK);
+		if(res == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+			
+		return new ResponseEntity<>(res.getRoomIndex(),HttpStatus.OK);
 	}
 }

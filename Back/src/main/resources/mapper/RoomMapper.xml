@@ -6,6 +6,8 @@
 
 <mapper namespace="com.dsu2021.pj.domain.room.repository.RoomMapper">
 
+	<!-- READ -->
+
 	<resultMap type="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes" id="roomResult">
 		<id property="roomIndex" column="room_index"></id>
 		<result property="userIndex" column="user_index"></result>
@@ -36,13 +38,37 @@
         <select id="getRoomByIndex" resultMap="roomResult">
 			SELECT * FROM room WHERE room_index = #{roomIndex};
 		</select>		
-		
-		
-		
-		
-		
 
 		<select id="get15RoomsByIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes">
 			SELECT * FROM room ORDER BY room_index DESC LIMIT ${index},15;
 		</select>
+
+	<resultMap
+		type="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomAddressRes" id="roomAddressResult">
+		<id property="roomAddressIndex" column="room_address_index"></id>
+		<result property="siDo" column="si_do"></result>
+		<result property="siGunGu" column="si_gun_gu"></result>
+		<result property="eupMyeonDong" column="eup_myeon_dong"></result>
+		<result property="roadName" column="road_name"></result>
+		<result property="detailAddress" column="detail_address"></result>
+	</resultMap>
+	
+	<select id = "getRoomAddressIndex" resultType="Long">
+		SELECT room_address_index FROM room_address WHERE
+		si_do = #{siDo} AND
+		si_gun_gu = #{siGunGu} AND
+		eup_myeon_dong = #{eupMyeonDong} AND
+		road_name = #{roadName} AND
+		detail_address = #{detailAddress};
+	</select>
+		
+		<!-- CREATE -->
+		
+	<insert id = "insertAddress">
+		INSERT INTO room_address (si_do,si_gun_gu,eup_myeon_dong,road_name,detail_address)
+		VALUES (#{siDo},#{siGunGu},#{eupMyeonDong},#{roadName},#{detailAddress});
+	</insert>
+		
+		
+		
 </mapper>
