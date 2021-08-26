@@ -13,7 +13,6 @@ public class UserDto {
     public static class SignInReq {
         private String email;
         private String password;
-
     }
 
     //DB 로그인 요청 DTO

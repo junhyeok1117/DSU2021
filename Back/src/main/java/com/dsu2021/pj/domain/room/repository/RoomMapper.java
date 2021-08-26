@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
 import com.dsu2021.pj.domain.room.dto.RoomDTO.RoomCategoryReq;
+import com.dsu2021.pj.domain.room.entity.Room;
 
 
 @Mapper
@@ -29,8 +30,7 @@ public interface RoomMapper {
 	
 	public void insertCategory(RoomDTO.RoomCategoryReq req);
 	
-	
-	public void insertRoom();
+	public void insertRoom(Room room);
 
 	
 

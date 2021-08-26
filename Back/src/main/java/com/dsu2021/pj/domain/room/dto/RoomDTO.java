@@ -57,8 +57,8 @@ public class RoomDTO {
 		//room
 		private String name;
 		private Integer price;
-		private Integer clean_price;
-		private Integer max_person;
+		private Integer cleanPrice;
+		private Integer maxPerson;
 		private String content;
 		@Data
 		@NoArgsConstructor

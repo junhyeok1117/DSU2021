@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
+import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
 
@@ -77,6 +78,8 @@ public class RoomService{
 		}
 		
 		Long userIndex = 1l;// 로그인 구현되면 그에 맞게 index가져오도록 수정 필요
+		
+		roomMapper.insertRoom(new Room(null,userIndex,addressIndex,categoryIndex,req.getName(),req.getPrice(),req.getCleanPrice(),req.getMaxPerson(),req.getContent()));
 		
 		return null;
 	}
