@@ -44,7 +44,8 @@ public class UserService {
                 return checkEmail;
             }
         }
-        return checkEmail;
+//      값이 없으면 exception 발생
+        return null;
     }
 
 

@@ -3,11 +3,12 @@ package com.dsu2021.pj.domain.user.entity;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.apache.ibatis.type.Alias;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
 public class User {
     private Long userIndex;
 	private String name;
