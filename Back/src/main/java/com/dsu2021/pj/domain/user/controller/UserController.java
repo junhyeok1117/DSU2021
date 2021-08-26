@@ -22,14 +22,14 @@ public class UserController {
 
 
     //로그인 요청
-    @GetMapping ("/signIn")
+    @PostMapping ("/signIn")
     public ResponseEntity<UserDto.UserCheckEmail> signIn(HttpSession session, @ModelAttribute UserDto.SignInReq signInReq) {
 
         UserDto.UserCheckEmail userCheckEmail = userService.checkUser(signInReq);
 
         session.setAttribute("email", userCheckEmail.getEmail());
 
-        return new ResponseEntity<UserDto.UserCheckEmail>(userCheckEmail, HttpStatus.OK);
+        return new ResponseEntity<>(userCheckEmail, HttpStatus.OK);
 
     }
 
