@@ -24,10 +24,13 @@ public class UserService {
 
 //      2. 로그인에 필요한 정보 조회
         List<User> AllUsers = getUser();
-        log.info("check");
+        log.info("check1");
+
+        UserDto.UserCheckEmail checkEmail = new UserDto.UserCheckEmail();
 
 //      3. 입력 값과 비교
         for (User user : AllUsers) {
+            log.info("check11");
             if (!user.getEmail().equals(signInReq.getEmail())) {
                 log.info("email error");
 //               controllerAdvice로 전달 , exception 발생시켜야함
@@ -36,25 +39,26 @@ public class UserService {
 //               controllerAdvice로 전달 , exception 발생시켜야함
             } else {
 //              4. 일치 시 id값만 프런트에 전달(확인용)
-                UserDto.UserCheckEmail checkEmail = new UserDto.UserCheckEmail();
                 checkEmail.setEmail(signInReq.getEmail());
 
                 return checkEmail;
             }
         }
+//      값이 없으면 exception 발생
         return null;
     }
 
 
     //    전체 user 조회
     public List<User> getAllUsers() {
+
         return userMapper.getAllUsers();
     }
 
     //    로그인 시 필요한 정보 조회
     public List<User> getUser() {
-        log.info("check1");
-        log.info("log = {}, hi = {}",userMapper.getUsers(),"hi");
+        log.info("check");
+
         return userMapper.getUsers();
     }
 
