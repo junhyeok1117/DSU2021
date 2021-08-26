@@ -1,18 +1,15 @@
 package com.dsu2021.pj.domain.room.entity;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
 public class RoomAddress {
 	private Long roomAddressIndex;
-	private String si_do;
-	private String si_gun_gu;
-	private String eup_myeon_dong;
-	private String road_name;
+	private String siDo;
+	private String siGunGu;
+	private String eupMyeonDong;
+	private String roadName;
 	private String detailAddress;
 }

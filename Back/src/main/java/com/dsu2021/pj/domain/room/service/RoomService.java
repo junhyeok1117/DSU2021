@@ -5,12 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
 
 @Service
 public class RoomService{
+	
+	//READ
 	
 	@Autowired
 	private RoomMapper roomMapper;
@@ -39,7 +43,6 @@ public class RoomService{
 		
 		rooms = roomMapper.search15Rooms(index,req,differenceDay);
 		
-		
 		return rooms;
 	}
 	
@@ -48,14 +51,24 @@ public class RoomService{
 		return room;
 	}
 	
-	
-	
-	
-	
-	
 	public List<RoomDTO.RoomRes> get15RoomsByPage(Integer page){
 		Integer index = ( page - 1 ) * 15;
 		List<RoomDTO.RoomRes> rooms = roomMapper.get15RoomsByIndex(index);
 		return rooms;
+	}
+	
+	//CREATE
+	
+	@Transactional
+	public RoomDTO.RoomHostRes insertRoom(RoomDTO.RoomHostReq req){
+		
+		RoomDTO.RoomAddressReq addressInfo = new RoomDTO.RoomAddressReq(null,req.getSiDo(),req.getSiGunGu(),req.getEupMyeonDong(),req.getRoadName(),req.getDetailAddress());
+		Long addressIndex = roomMapper.getRoomAddressIndex(addressInfo);
+		if(addressIndex == null) {
+			roomMapper.insertAddress(addressInfo);
+			addressIndex = roomMapper.getRoomAddressIndex(addressInfo);
+		}
+		
+		return null;
 	}
 }

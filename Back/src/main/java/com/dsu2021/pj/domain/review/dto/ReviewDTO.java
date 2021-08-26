@@ -18,6 +18,17 @@ public class ReviewDTO {
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
+	public static class ReviewReq{
+	    private Long roomIndex;
+	    private String content;
+	    private int starRating;
+	    private Date registerDate;
+	}
+	
+	
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class ReviewRes{
 	    private Long roomIndex;
 	    private Long userIndex;

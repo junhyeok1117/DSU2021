@@ -14,7 +14,6 @@ class Dsu2021ApplicationTests {
 	
     @Test
     void contextLoads() {
-    	
     	System.out.println(dataSource.getClass());// com.zaxxer.hikari.HikariDataSource 등록 확인
     }
 

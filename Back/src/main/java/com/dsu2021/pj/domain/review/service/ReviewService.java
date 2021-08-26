@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dsu2021.pj.domain.review.dto.ReviewDTO;
 import com.dsu2021.pj.domain.review.dto.ReviewDTO.ReviewRes;
 import com.dsu2021.pj.domain.review.repository.ReviewMapper;
 
@@ -26,5 +27,10 @@ public class ReviewService {
 		return reviews;
 	}
 	
+	public Long insertReview(ReviewDTO.ReviewReq req) {
+		
+		
+		return (long) 0;
+	}
 	
 }
