@@ -69,6 +69,16 @@ public class RoomService{
 			addressIndex = roomMapper.getRoomAddressIndex(addressInfo);
 		}
 		
+		RoomDTO.RoomCategoryReq categoryInfo = new RoomDTO.RoomCategoryReq(null,req.getLocation(),req.getKind());
+		Long categoryIndex = roomMapper.getRoomCategoryIndex(categoryInfo);
+		if(categoryIndex == null) {
+			roomMapper.insertCategory(categoryInfo);
+			categoryIndex = roomMapper.getRoomCategoryIndex(categoryInfo);
+		}
+		
+		Long userIndex = 1l;// 로그인 구현되면 그에 맞게 index가져오도록 수정 필요
+		
 		return null;
 	}
+	
 }

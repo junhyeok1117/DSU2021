@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
+import com.dsu2021.pj.domain.room.dto.RoomDTO.RoomCategoryReq;
 
 
 @Mapper
@@ -20,9 +21,17 @@ public interface RoomMapper {
 	
 	public Long getRoomAddressIndex(RoomDTO.RoomAddressReq req);
 	
+	public Long getRoomCategoryIndex(RoomDTO.RoomCategoryReq req);
+	
 //	CREATE
 	
 	public void insertAddress(RoomDTO.RoomAddressReq req);
 	
+	public void insertCategory(RoomDTO.RoomCategoryReq req);
+	
+	
 	public void insertRoom();
+
+	
+
 }

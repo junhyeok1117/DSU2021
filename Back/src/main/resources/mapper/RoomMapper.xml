@@ -68,6 +68,10 @@
 		INSERT INTO room_address (si_do,si_gun_gu,eup_myeon_dong,road_name,detail_address)
 		VALUES (#{siDo},#{siGunGu},#{eupMyeonDong},#{roadName},#{detailAddress});
 	</insert>
+	
+	<insert id = "insertCategory">
+		INSERT INTO category (location,kind) values (#{location},#{kind});
+	</insert>
 		
 		
 		
