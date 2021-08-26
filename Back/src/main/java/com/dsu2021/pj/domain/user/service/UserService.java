@@ -53,6 +53,8 @@ public class UserService {
 
     //    로그인 시 필요한 정보 조회
     public List<User> getUser() {
+        log.info("check1");
+        log.info("log = {}, hi = {}",userMapper.getUsers(),"hi");
         return userMapper.getUsers();
     }
 
