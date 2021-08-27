@@ -30,7 +30,20 @@ public class UserDto {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class SignUp {
+    public static class SignUpReq {
+        private String email;
+        private String name;
+        private String birthday;
+        private String password;
+        private Integer phoneNum;
+
+    }
+
+    //회원가입 요청 DTO
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class SignUpRes {
         private String email;
         private String name;
         private String birthday;
