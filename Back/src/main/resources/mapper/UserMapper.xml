@@ -5,11 +5,6 @@
 
 
 <mapper namespace="com.dsu2021.pj.domain.user.repository.UserMapper">
-    <resultMap type="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes" id="roomResult">
-        <id property="userIndex" column="room_index"></id>
-        <result property="registerDate" column="register_date"></result>
-    </resultMap>
-
 
     <select id="getAllUsers" resultType="User">
         SELECT * FROM user
@@ -17,6 +12,10 @@
 
     <select id="getUsers" resultType="User">
         SELECT email, password FROM user
+    </select>
+
+    <select id="getUserEmail" resultType="User">
+        SELECT email FROM user
     </select>
 
     <insert id="addUser">

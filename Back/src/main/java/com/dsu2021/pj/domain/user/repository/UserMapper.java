@@ -17,7 +17,10 @@ public interface UserMapper {
     //	User 로그인 시 email과 password 조회
     List<User> getUsers();
 
+    //  회원가입 시 중복을 확인하기 위한 email 조회
+    List<UserDto.DuplexEmail> dupleEmail();
+
     //	User 추가
-    User addUser(UserDto userDto);
+    void addUser(User user);
 
 }

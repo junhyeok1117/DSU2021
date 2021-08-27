@@ -1,8 +1,7 @@
 package com.dsu2021.pj.domain.user.controller;
 
 import com.dsu2021.pj.domain.user.dto.UserDto;
-import com.dsu2021.pj.domain.user.entity.User;
-import com.dsu2021.pj.domain.user.service.UserService;
+import com.dsu2021.pj.domain.user.service.SignInService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,43 +12,22 @@ import javax.servlet.http.HttpSession;
 @CrossOrigin(origins="*")
 @RequiredArgsConstructor
 @RestController
-public class UserController {
+public class SignInController {
 
-    private final UserService userService;
+    private final SignInService userService;
 
-//    회원가입
-//    @PostMapping("/signUp")
-//    public ResponseEntity signUp(@ModelAttribute UserDto.SignUpReq signUpReq) {
-//
-//
-//
-//
-//        return new ResponseEntity<>(, HttpStatus.OK);
-//    }
-
-
-    //로그인 요청
+    //로그인
     @PostMapping ("/signIn")
     public ResponseEntity<UserDto.UserCheckEmail> signIn(HttpSession session, @RequestBody UserDto.SignInReq signInReq) {
 
         UserDto.UserCheckEmail userCheckEmail = userService.checkUser(signInReq);
 
-        session.setAttribute("email", userCheckEmail.getEmail());
+        session.setAttribute("email", userCheckEmail.getEmail());//email 값을 세션에 저장
 
         return new ResponseEntity<>(userCheckEmail, HttpStatus.OK);
 
     }
 
-    // 로그인 요청
-//    @PostMapping("/signIn")
-//    public ResponseEntity<UserDto.UserIdRes> signIn(HttpSession session, @ModelAttribute UserDto.UserSignIn dto) {
-//
-//        UserDto.UserSignRes userRes = userService.userSignIn(dto);
-//
-//        session.setAttribute(userRes.getEmail(), "email");
-//
-//        return new ResponseEntity<UserDto.UserIdRes>(userRes, HttpStatus.OK);
-//    }
 
 
 //    @PostMapping
