@@ -17,7 +17,6 @@ public class SearchReservationController{
 	@Autowired
 	private ReservationService service;
 	
-    //로그인 요청
     @GetMapping ("/reservations/{index}")
     public ResponseEntity<UserDto.UserCheckEmail> getReservationByIndex(@PathVariable("index") Long index) {
     	
