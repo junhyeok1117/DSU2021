@@ -106,7 +106,7 @@
 		VALUES (#{roomIndex},#{bed},#{bath},#{tv},#{hairDryer},#{fireExtinguisher},#{refrigerator},#{microwave},#{cookware},#{park},#{aircon},#{kitchen},#{wifi},#{washingMachine});
 	</insert>
 	
-	<insert id = "insertFacility">
+	<insert id = "insertInformation">
 		INSERT INTO information (room_index,self_check_in,common_solo) VALUES (roomIndex,selfCheckIn,commonSolo);
 	</insert>
 	
