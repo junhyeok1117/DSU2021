@@ -48,8 +48,8 @@ public class RoomDTO {
 		private String selfCheckIn;
 		private String commonSolo;
 		//availableDate
-		@JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Seoul")
-		@DateTimeFormat(pattern="yyyyMMdd")
+//		@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+//		@DateTimeFormat(pattern="yyyy-MM-dd")
 		private Date[] availableDates;
 		//category
 		private String location;
