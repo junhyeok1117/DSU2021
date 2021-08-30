@@ -38,6 +38,15 @@ public class UserController {
     }
 
 
+    //로그아웃
+    @GetMapping("/signOut")
+    public ResponseEntity signOut(HttpSession session){
+
+        session.invalidate();
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
 
 
 }
