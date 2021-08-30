@@ -107,11 +107,11 @@
 	</insert>
 	
 	<insert id = "insertInformation">
-		INSERT INTO information (room_index,self_check_in,common_solo) VALUES (roomIndex,selfCheckIn,commonSolo);
+		INSERT INTO information (room_index,self_check_in,common_solo) VALUES (#{roomIndex},#{selfCheckIn},#{commonSolo});
 	</insert>
 	
 	<insert id = "insertAvailableDate">
-		INSERT INTO available_date (room_index,date) VALUES (roomIndex,date);
+		INSERT INTO available_date (room_index,date) VALUES (#{roomIndex},#{date});
 	</insert>
 
 </mapper>

@@ -67,6 +67,9 @@ public class RoomService{
 	
 	@Transactional
 	public RoomDTO.RoomHostRes insertRoom(RoomDTO.RoomHostReq req){ // facility, information 값 검증 추가 필요
+		System.out.println("네.");
+		System.out.println(req.getImagePaths()[0] + " "+req.getImagePaths()[1] );
+		System.out.println("이다.");
 		
 		RoomDTO.RoomAddressReq addressInfo = new RoomDTO.RoomAddressReq(null,req.getSiDo(),req.getSiGunGu(),req.getEupMyeonDong(),req.getRoadName(),req.getDetailAddress());
 		Long addressIndex = roomMapper.getRoomAddressIndex(addressInfo);
@@ -85,10 +88,12 @@ public class RoomService{
 		Long userIndex = 1l;// 로그인 구현되면 그에 맞게 index가져오도록 수정 필요
 		
 		Room roomInfo = new Room(null,userIndex,addressIndex,categoryIndex,req.getName(),req.getPrice(),req.getCleanPrice(),req.getMaxPerson(),req.getContent());
+
 		roomMapper.insertRoom(roomInfo);
 		Long roomIndex = roomMapper.getRoomIndex(roomInfo);
 		
 		//이미지 경로 DB에 저장하는 로직 작성할 것
+		if(req.getImagePaths() != null)
 		for(int i = 0 ; i < req.getImagePaths().length ; i++) {
 			roomMapper.insertRoomImagePath(new RoomImagePath(roomIndex,req.getImagePaths()[i].getImageNumber(),req.getImagePaths()[i].getImagePath()));
 		}
@@ -96,6 +101,7 @@ public class RoomService{
 		roomMapper.insertFacility(new Facility(roomIndex,req.getBed(),req.getBath(),req.getTv(),req.getHairDryer(),req.getFireExtinguisher(),req.getRefrigerator(),req.getMicrowave(),req.getCookware(),req.getPark(),req.getAircon(),req.getKitchen(),req.getWifi(),req.getWashingMachine()));
 		roomMapper.insertInformation(new Information(roomIndex,req.getSelfCheckIn(),req.getCommonSolo()));
 		
+		if(req.getAvailableDates() != null)
 		for(int i = 0 ; i < req.getAvailableDates().length ; i++) {
 			roomMapper.insertAvailableDate(new AvailableDate(roomIndex,req.getAvailableDates()[i] ));
 		}
