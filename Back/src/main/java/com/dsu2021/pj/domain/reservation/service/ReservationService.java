@@ -15,4 +15,8 @@ public class ReservationService {
 		
 	}
 
+	public void reservation() {
+
+	}
+
 }

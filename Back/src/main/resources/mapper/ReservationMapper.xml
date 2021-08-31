@@ -6,8 +6,8 @@
 
 <mapper namespace="com.dsu2021.pj.domain.reservation.repository.ReservationMapper">
 
-	<resultMap 
-		type="com.dsu2021.pj.domain.reservation.dto.ReservationDTO$ReservationRes" id="reservationResult">
+	<resultMap
+			type="com.dsu2021.pj.domain.reservation.entity.Reservation" id="reservationResult">
 		<id property="reservationindex" column="reservation_index"></id>
 		<result property="userIndex" column="user_index"></result>
 		<result property="roomIndex" column="room_index"></result>
@@ -21,6 +21,11 @@
 	<select id ="getReservationByIndex" resultMap="reservationResult">
 		
 	</select>
+
+	<insert id="reservation">
+		insert into reservation (price, email, birthday, phone, password)
+		values (#{name}, #{email}, #{birthday}, #{phone}, #{password})
+	</insert>
 	
 
 </mapper>

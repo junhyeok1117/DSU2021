@@ -12,8 +12,33 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ReservationDTO {
-	
+public class ReservationDto {
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class ReservationReq{//reservation에서 가져올 값들
+		private String reservationState;
+		private int reservationPrice;
+		private Date checkinDate;
+		private Date checkoutDate;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
