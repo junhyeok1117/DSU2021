@@ -15,18 +15,15 @@ public class ReservationController {
 	@Autowired
 	private ReservationService service;
 	
-<<<<<<< HEAD:Back/src/main/java/com/dsu2021/pj/domain/reservation/controller/ReservationController.java
     //예약조회
-=======
->>>>>>> dsu/yh:Back/src/main/java/com/dsu2021/pj/domain/reservation/controller/SearchReservationController.java
-    @GetMapping ("/reservations/{index}")
-    public ResponseEntity<UserDto.UserCheckEmail> getReservationByIndex(@PathVariable("index") Long index) {
-    	
-    	service.getReservationByIndex(index);
-    	
-        return new ResponseEntity<UserDto.UserCheckEmail>(HttpStatus.OK);
-
-    }
+//    @GetMapping ("/reservations/{index}")
+//    public ResponseEntity<UserDto.UserCheckEmail> getReservationByIndex(@PathVariable("index") Long index) {
+//
+//    	service.getReservationByIndex(index);
+//
+//        return new ResponseEntity<UserDto.UserCheckEmail>(HttpStatus.OK);
+//
+//    }
 
     @PostMapping("/reservations")
     public ResponseEntity reservation(ReservationDto.ReservationReq reservationReq) {
