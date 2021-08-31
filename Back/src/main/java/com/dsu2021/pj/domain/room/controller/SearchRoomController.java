@@ -1,5 +1,6 @@
 package com.dsu2021.pj.domain.room.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,13 @@ public class SearchRoomController {
 		return new ResponseEntity<>(room,HttpStatus.OK);
     }
 	
+	@GetMapping("/rooms/{roomIndex}/availableDates")
+	public ResponseEntity<Date[]> getAvailableDatesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		
+		Date[] dates = service.getAvailableDatesByRoomIndex(roomIndex);
+		
+		return new ResponseEntity<>(dates,HttpStatus.OK);
+	}
 
 }

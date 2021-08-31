@@ -39,7 +39,7 @@
 			SELECT * FROM room WHERE room_index = #{roomIndex};
 		</select>		
 
-		<select id="get15RoomsFromIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes">
+		<select id="get15RoomsFromIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes"> <!-- 이걸 사용하는 곳이 아직 없음 -->
 			SELECT * FROM room ORDER BY room_index DESC LIMIT ${index},15;
 		</select>
 
@@ -80,7 +80,11 @@
 		content = #{content}
 		ORDER BY room_index DESC LIMIT 0,1;
 	</select>
-		
+	
+	<select id = "getAvailableDatesByRoomIndex" resultType="Date">
+		SELECT date FROM available_date WHERE room_index = #{roomIndex} ORDER BY date ASC;
+	</select>
+
 		<!-- CREATE -->
 		
 	<insert id = "insertAddress">

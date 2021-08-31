@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
 import com.dsu2021.pj.domain.room.service.RoomService;
@@ -20,7 +22,7 @@ public class InsertRoomController {
 	
 	
 	@PostMapping("/rooms")
-	public ResponseEntity<?> insertRoom(@RequestBody RoomDTO.RoomHostReq req){
+	public ResponseEntity<?> insertRoom(@RequestParam MultipartFile file,@RequestBody RoomDTO.RoomHostReq req){
 		
 		RoomDTO.RoomHostRes res =  service.insertRoom(req);
 		

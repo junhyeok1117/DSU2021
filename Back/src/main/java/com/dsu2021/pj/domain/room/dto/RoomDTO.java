@@ -87,9 +87,9 @@ public class RoomDTO {
 		private String kind="";
 		private String siDo="";
 		private String siGunGu="";
-		@DateTimeFormat(pattern="yyyyMMdd")
+		@DateTimeFormat(pattern="yyyy-MM-dd")
 		private Date checkInDate;
-		@DateTimeFormat(pattern="yyyyMMdd")
+		@DateTimeFormat(pattern="yyyy-MM-dd")
 		private Date checkOutDate;
 		private Integer maxPerson=0;
 		
@@ -121,49 +121,6 @@ public class RoomDTO {
 	}
 
 	//////////////////////////////
-	
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class RoomAddressReq{ //주소 조회(검색) 요청 DTO
-		private Long roomAddressIndex;
-		private String siDo;
-		private String siGunGu;
-		private String eupMyeonDong;
-		private String roadName;
-		private String detailAddress;
-	}
-	
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class RoomAddressRes{ //주소 조회(검색) 응답 DTO
-		private Long roomAddressIndex;
-		private String siDo;
-		private String siGunGu;
-		private String eupMyeonDong;
-		private String roadName;
-		private String detailAddress;
-	}
-	
-	//////////////////////////////
-	
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class RoomCategoryReq{ //카테고리 조회(검색) 요청 DTO
-		private Long categoryIndex;
-		private String location;
-		private String kind;
-	}
-	
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class RoomCategoryRes{ //카테고리 조회(검색) 응답 DTO
-		private Long categoryIndex;
-		private String location;
-		private String kind;
-	}
+
 	
 }

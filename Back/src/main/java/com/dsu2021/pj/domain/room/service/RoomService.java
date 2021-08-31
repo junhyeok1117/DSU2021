@@ -2,6 +2,7 @@ package com.dsu2021.pj.domain.room.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
 import com.dsu2021.pj.domain.room.dto.RoomDTO.RoomHostReq.ImagePath;
 import com.dsu2021.pj.domain.room.entity.AvailableDate;
+import com.dsu2021.pj.domain.room.entity.Category;
 import com.dsu2021.pj.domain.room.entity.Facility;
 import com.dsu2021.pj.domain.room.entity.Information;
 import com.dsu2021.pj.domain.room.entity.Room;
+import com.dsu2021.pj.domain.room.entity.RoomAddress;
 import com.dsu2021.pj.domain.room.entity.RoomImagePath;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
@@ -35,9 +38,6 @@ public class RoomService{
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 				req = new RoomDTO.RoomReq(req,sdf.parse("0000.01.01"),sdf.parse("9999.12.31"));
 				rooms = roomMapper.search15Rooms(index, req, 0);
-				System.out.println(req);
-				System.out.println(sdf.parse("0000.01.01"));
-				System.out.println(sdf.parse("9999.12.31"));
 				return rooms;
 			} catch (ParseException e) {
 				// 일어날리 없는 에러
@@ -63,22 +63,26 @@ public class RoomService{
 		return rooms;
 	}
 	
+	public Date[] getAvailableDatesByRoomIndex(Long roomIndex) {
+		
+		Date[] dates = roomMapper.getAvailableDatesByRoomIndex(roomIndex);
+		
+		return dates;
+	}
+	
 	//CREATE
 	
 	@Transactional
 	public RoomDTO.RoomHostRes insertRoom(RoomDTO.RoomHostReq req){ // facility, information 값 검증 추가 필요
-		System.out.println("네.");
-		System.out.println(req.getImagePaths()[0] + " "+req.getImagePaths()[1] );
-		System.out.println("이다.");
 		
-		RoomDTO.RoomAddressReq addressInfo = new RoomDTO.RoomAddressReq(null,req.getSiDo(),req.getSiGunGu(),req.getEupMyeonDong(),req.getRoadName(),req.getDetailAddress());
+		RoomAddress addressInfo = new RoomAddress(null,req.getSiDo(),req.getSiGunGu(),req.getEupMyeonDong(),req.getRoadName(),req.getDetailAddress());
 		Long addressIndex = roomMapper.getRoomAddressIndex(addressInfo);
 		if(addressIndex == null) {
 			roomMapper.insertAddress(addressInfo);
 			addressIndex = roomMapper.getRoomAddressIndex(addressInfo);
 		}
 		
-		RoomDTO.RoomCategoryReq categoryInfo = new RoomDTO.RoomCategoryReq(null,req.getLocation(),req.getKind());
+		Category categoryInfo = new Category(null,req.getLocation(),req.getKind());
 		Long categoryIndex = roomMapper.getRoomCategoryIndex(categoryInfo);
 		if(categoryIndex == null) {
 			roomMapper.insertCategory(categoryInfo);
