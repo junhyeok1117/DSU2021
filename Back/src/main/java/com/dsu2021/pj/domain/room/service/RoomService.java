@@ -82,6 +82,14 @@ public class RoomService{
 		return roomMapper.getFacilityByRoomIndex(roomIndex);
 	}
 	
+	public RoomDTO.RoomAddressRes getAddressByRoomAddressIndex(Long roomAddressIndex){
+		return roomMapper.getAddressByRoomAddressIndex(roomAddressIndex);
+	}
+	
+	public RoomDTO.RoomCategoryRes getCategoryByCategoryIndex(Long categoryIndex){
+		return roomMapper.getCategoryByCategoryIndex(categoryIndex);
+	}
+	
 	//CREATE
 	
 	@Transactional

@@ -158,7 +158,26 @@ public class RoomDTO {
 		private int imageNumber;
 		private String imagePath;
 	}
+	//////////////////////////////
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class RoomAddressRes{ //방 주소 조회 응답 DTO
+		private Long roomAddressIndex;
+		private String siDo;
+		private String siGunGu;
+		private String eupMyeonDong;
+		private String roadName;
+		private String detailAddress;
+	}
 	
-	
-	
+	//////////////////////////////
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class RoomCategoryRes{ //방 카테고리 조회 응답 DTO
+		private Long categoryIndex;
+		private String location;
+		private String kind;
+	}
 }

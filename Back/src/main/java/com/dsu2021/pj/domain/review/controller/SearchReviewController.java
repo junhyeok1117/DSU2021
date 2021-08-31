@@ -43,5 +43,5 @@ public class SearchReviewController {
 		
 		return new ResponseEntity<>(review,HttpStatus.OK);
 	}
-	
+
 }

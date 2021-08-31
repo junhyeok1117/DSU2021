@@ -65,5 +65,17 @@ public class SearchRoomController {
 		
 		return new ResponseEntity<>(service.getImagesByRoomIndex(roomIndex),HttpStatus.OK);
 	}
+	
+	@GetMapping("/rooms/addresses/{roomAddressIndex}")
+	public ResponseEntity<RoomDTO.RoomAddressRes> getAddressByRoomAddressIndex(@PathVariable("roomAddressIndex") Long roomAddressIndex){
+		return new ResponseEntity<>(service.getAddressByRoomAddressIndex(roomAddressIndex),HttpStatus.OK);
+	}
+	
+	@GetMapping("/categories/{categoryIndex}")
+	public ResponseEntity<RoomDTO.RoomCategoryRes> getCategoryByCategoryIndex(@PathVariable("categoryIndex") Long categoryIndex){
+		return new ResponseEntity<>(service.getCategoryByCategoryIndex(categoryIndex),HttpStatus.OK);
+	}
+	
+	
 
 }

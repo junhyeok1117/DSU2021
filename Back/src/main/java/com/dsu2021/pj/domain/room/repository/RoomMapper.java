@@ -39,6 +39,10 @@ public interface RoomMapper {
 	
 	public RoomDTO.RoomFacilityRes getFacilityByRoomIndex(Long roomIndex);
 	
+	public RoomDTO.RoomAddressRes getAddressByRoomAddressIndex(Long roomAddressIndex);
+	
+	public RoomDTO.RoomCategoryRes getCategoryByCategoryIndex(Long categoryIndex);
+	
 //	CREATE
 	
 	public void insertAddress(RoomAddress req);
