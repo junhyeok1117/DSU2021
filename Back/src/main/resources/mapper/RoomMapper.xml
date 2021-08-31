@@ -88,7 +88,7 @@
 	</select>
 	
 	<select id = "getCategoryByCategoryIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomCategoryRes">
-		SELECT * FROM category WHERE category_index = #{categoryIndex};
+		SELECT category_index categoryIndex, location, kind FROM category WHERE category_index = #{categoryIndex};
 	</select>
 	
 		<!-- INSERT -->
