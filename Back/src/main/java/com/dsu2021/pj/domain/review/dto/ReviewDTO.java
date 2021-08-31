@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Alias("reviewDTO")// RoomMapper.xml에서 쓰기 위한 별명 지정
+//@Alias("reviewDTO")// RoomMapper.xml에서 쓰기 위한 별명 지정
 @Setter
 @Getter
 public class ReviewDTO {
@@ -22,7 +22,6 @@ public class ReviewDTO {
 	    private Long roomIndex;
 	    private String content;
 	    private int starRating;
-	    private Date registerDate;
 	}
 	
 	
@@ -33,7 +32,7 @@ public class ReviewDTO {
 	    private Long roomIndex;
 	    private Long userIndex;
 	    private String content;
-	    private int starRating;
+	    private Integer starRating;
 	    private Date registerDate;
 	}
 

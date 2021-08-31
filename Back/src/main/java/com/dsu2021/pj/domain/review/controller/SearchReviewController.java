@@ -36,4 +36,12 @@ public class SearchReviewController {
 		return new ResponseEntity<>(reviews,HttpStatus.OK);
 	}
 	
+	@GetMapping("/rooms/{roomIndex}/and/users/{userIndex}/review")
+	public ResponseEntity<ReviewDTO.ReviewRes> getReviewByIndices(@PathVariable("roomIndex") Long roomIndex, @PathVariable("userIndex") Long userIndex){
+		
+		ReviewDTO.ReviewRes review = service.getReviewByIndices(roomIndex,userIndex);
+		
+		return new ResponseEntity<>(review,HttpStatus.OK);
+	}
+
 }

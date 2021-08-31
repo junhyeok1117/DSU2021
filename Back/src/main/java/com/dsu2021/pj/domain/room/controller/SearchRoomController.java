@@ -1,5 +1,6 @@
 package com.dsu2021.pj.domain.room.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,44 @@ public class SearchRoomController {
 		
 		return new ResponseEntity<>(room,HttpStatus.OK);
     }
+	
+	@GetMapping("/rooms/{roomIndex}/available-dates")
+	public ResponseEntity<Date[]> getAvailableDatesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		
+		Date[] dates = service.getAvailableDatesByRoomIndex(roomIndex);
+		
+		return new ResponseEntity<>(dates,HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/{roomIndex}/information")
+	public ResponseEntity<RoomDTO.RoomInformationRes> getInformationByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		return new ResponseEntity<>(service.getInformationByRoomIndex(roomIndex),HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/{roomIndex}/facility")
+	public ResponseEntity<RoomDTO.RoomFacilityRes> getFacilityByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		return new ResponseEntity<>(service.getFacilityByRoomIndex(roomIndex),HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/{roomIndex}/images")
+	public ResponseEntity<RoomDTO.RoomFacilityRes> getImagesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		return new ResponseEntity<>(service.getImagesByRoomIndex(roomIndex),HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/addresses/{roomAddressIndex}")
+	public ResponseEntity<RoomDTO.RoomAddressRes> getAddressByRoomAddressIndex(@PathVariable("roomAddressIndex") Long roomAddressIndex){
+		return new ResponseEntity<>(service.getAddressByRoomAddressIndex(roomAddressIndex),HttpStatus.OK);
+	}
+	
+	@GetMapping("/categories/{categoryIndex}")
+	public ResponseEntity<RoomDTO.RoomCategoryRes> getCategoryByCategoryIndex(@PathVariable("categoryIndex") Long categoryIndex){
+		return new ResponseEntity<>(service.getCategoryByCategoryIndex(categoryIndex),HttpStatus.OK);
+	}
+	
 	
 
 }

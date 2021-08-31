@@ -6,7 +6,7 @@
 
 <mapper namespace="com.dsu2021.pj.domain.room.repository.RoomMapper">
 
-	<!-- READ -->
+	<!-- SELECT -->
 
 	<resultMap type="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes" id="roomResult">
 		<id property="roomIndex" column="room_index"></id>
@@ -39,19 +39,9 @@
 			SELECT * FROM room WHERE room_index = #{roomIndex};
 		</select>		
 
-		<select id="get15RoomsFromIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes">
+		<select id="get15RoomsFromIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes"> <!-- 이걸 사용하는 곳이 아직 없음 -->
 			SELECT * FROM room ORDER BY room_index DESC LIMIT ${index},15;
 		</select>
-
-	<resultMap
-		type="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomAddressRes" id="roomAddressResult">
-		<id property="roomAddressIndex" column="room_address_index"></id>
-		<result property="siDo" column="si_do"></result>
-		<result property="siGunGu" column="si_gun_gu"></result>
-		<result property="eupMyeonDong" column="eup_myeon_dong"></result>
-		<result property="roadName" column="road_name"></result>
-		<result property="detailAddress" column="detail_address"></result>
-	</resultMap>
 	
 	<select id = "getRoomAddressIndex" resultType="Long">
 		SELECT room_address_index FROM room_address WHERE
@@ -80,8 +70,28 @@
 		content = #{content}
 		ORDER BY room_index DESC LIMIT 0,1;
 	</select>
-		
-		<!-- CREATE -->
+	
+	<select id = "getAvailableDatesByRoomIndex" resultType="Date">
+		SELECT date FROM available_date WHERE room_index = #{roomIndex} ORDER BY date ASC;
+	</select>
+	
+	<select id = "getInformationByRoomIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomInformationRes">
+		SELECT room_index roomIndex, self_check_in selfCheckIn, common_solo commonSolo FROM information WHERE room_index = #{roomIndex};
+	</select>
+	
+	<select id = "getFacilityByRoomIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomFacilityRes">
+		SELECT room_index roomIndex, bed, bath,tv, hair_dryer hairDryer,fire_extinguisher fireExtinguisher, refrigerator, microwave, cookware,park,aircon,kitchen,wifi,washing_machine washingMachine FROM facility WHERE room_index = #{roomIndex};
+	</select>
+	
+	<select id = "getAddressByRoomAddressIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomAddressRes">
+		SELECT room_address_index roomAddressIndex, si_do siDo, si_gun_gu siGunGu, eup_myeon_dong eupMyeonDong, road_name roadName, detail_address detailAddress FROM room_address WHERE room_address_index = #{roomAddressIndex};
+	</select>
+	
+	<select id = "getCategoryByCategoryIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomCategoryRes">
+		SELECT * FROM category WHERE category_index = #{categoryIndex};
+	</select>
+	
+		<!-- INSERT -->
 		
 	<insert id = "insertAddress">
 		INSERT INTO room_address (si_do,si_gun_gu,eup_myeon_dong,road_name,detail_address)

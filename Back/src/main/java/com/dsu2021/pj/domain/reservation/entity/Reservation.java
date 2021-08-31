@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Reservation {
-	private Long reservationindex;
+	private Long reservationIndex;
 	private Long userIndex;
 	private Long roomIndex;
 	private String reservationState;
@@ -18,4 +18,8 @@ public class Reservation {
 	private Date reservationDate;
 	private int adult;
 	private int child;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dsu/yh
