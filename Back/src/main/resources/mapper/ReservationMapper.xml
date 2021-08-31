@@ -8,24 +8,47 @@
 
 	<resultMap
 			type="com.dsu2021.pj.domain.reservation.entity.Reservation" id="reservationResult">
-		<id property="reservationindex" column="reservation_index"></id>
-		<result property="userIndex" column="user_index"></result>
-		<result property="roomIndex" column="room_index"></result>
-		<result property="reservationState" column="reservation_state"></result>
-		<result property="reservationPrice" column="reservation_price"></result>
-		<result property="checkinDate" column="check_in_date"></result>
-		<result property="checkoutDate" column="check_out_date"></result>
-		<result property="reservationDate" column="reservation_date"></result>
+		<id property="reservationindex" column="reservation_index"/>
+		<result property="userIndex" column="user_index"/>
+		<result property="roomIndex" column="room_index"/>
+		<result property="reservationState" column="reservation_state"/>
+		<result property="reservationPrice" column="reservation_price"/>
+		<result property="checkinDate" column="check_in_date"/>
+		<result property="checkoutDate" column="check_out_date"/>
+		<result property="reservationDate" column="reservation_date"/>
 	</resultMap>
-	
+
+	<resultMap type="com.dsu2021.pj.domain.room.entity.Room" id="roomResult">
+		<id property="roomIndex" column="room_index"/>
+		<result property="userIndex" column="user_index"/>
+		<result property="addressIndex" column="address_index"/>
+		<result property="categoryIndex" column="category_index"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="cleanPrice" column="clean_price"/>
+		<result property="maxPerson" column="max_person"/>
+		<result property="content" column="content"/>
+	</resultMap>
+
+
 	<select id ="getReservationByIndex" resultMap="reservationResult">
-		
+
 	</select>
 
-	<insert id="reservation">
-		insert into reservation (price, email, birthday, phone, password)
-		values (#{name}, #{email}, #{birthday}, #{phone}, #{password})
-	</insert>
+<!--예약 시 사용자가 입력할 값	-->
+<!--	<insert id="reservation">-->
+<!--		insert into reservation (check_in_date, check_out_date, adult, child)-->
+<!--		values (#{checkinDate}, #{checkoutDate}, #{adult}, #{child})-->
+<!--	</insert>-->
+
+<!--room 테이블에서 현재 선택한 숙소에 대해 가격과 청소비 조회	-->
+	<select id="selectRoom" resultMap="roomResult">
+		SELECT roomIndex, price, clean_price
+		FROM room
+		WHERE roomIndex = #{roomIndex}
+	</select>
+
+
 	
 
 </mapper>

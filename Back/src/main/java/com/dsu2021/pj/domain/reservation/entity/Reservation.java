@@ -16,4 +16,6 @@ public class Reservation {
 	private Date checkinDate;
 	private Date checkoutDate;
 	private Date reservationDate;
+	private int adult;
+	private int child;
 }

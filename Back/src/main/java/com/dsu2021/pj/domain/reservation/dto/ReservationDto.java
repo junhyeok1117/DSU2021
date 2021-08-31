@@ -17,11 +17,20 @@ public class ReservationDto {
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class ReservationReq{//reservation에서 가져올 값들
-		private String reservationState;
-		private int reservationPrice;
+	public static class InsertReq{//사용자가 입력해야하는 값
 		private Date checkinDate;
 		private Date checkoutDate;
+		private Integer adult;
+		private Integer child;
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class RoomReq{//숙소에 대한 필요한 값
+		private Long roomIndex;
+		private Integer price;
+		private Integer cleanPrice;
 	}
 
 
