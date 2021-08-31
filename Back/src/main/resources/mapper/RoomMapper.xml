@@ -77,7 +77,8 @@
 		price = #{price} AND
 		clean_price = #{cleanPrice} AND
 		max_person = #{maxPerson} AND
-		content = #{content};
+		content = #{content}
+		ORDER BY room_index DESC LIMIT 0,1;
 	</select>
 		
 		<!-- CREATE -->
