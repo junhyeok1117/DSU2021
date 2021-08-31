@@ -6,22 +6,24 @@
 
 <mapper namespace="com.dsu2021.pj.domain.user.repository.UserMapper">
 
-    <select id="getAllUsers" resultType="User">
-        SELECT * FROM user
+<!--로그인 시 email과 password 조회-->
+    <select id="signIn" resultType="User">
+        SELECT email, password
+        FROM user
+        WHERE email = #{email}
+        AND password = #{password}
     </select>
 
-    <select id="getUsers" resultType="User">
-        SELECT email, password FROM user
-    </select>
-
-    <select id="getUserEmail" resultType="User">
-        SELECT email FROM user
+<!--회원가입 시 중복 email을 확인하기 위한-->
+    <select id="dupleEmail" resultType="User">
+        SELECT email
+        FROM user
+        WHERE email = #{email}
     </select>
 
     <insert id="addUser">
         insert into user (name, email, birthday, phone, password)
-        value (#{name}, #{email}, #{birthday}, #{phoneNum}, #{password});
+        values (#{name}, #{email}, #{birthday}, #{phone}, #{password})
     </insert>
-
 
 </mapper>

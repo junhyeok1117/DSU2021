@@ -1,8 +1,6 @@
 package com.dsu2021.pj.domain.user.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -36,8 +34,8 @@ public class UserDto {
     public static class SignUpReq {
         private String email;
         private String name;
-        @JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Seoul")
-        @DateTimeFormat(pattern="yyyyMMdd")
+//        @JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Seoul")
+//        @DateTimeFormat(pattern="yyyyMMdd")
         private Date birthday;
         private String password;
         private String phone;
@@ -51,8 +49,8 @@ public class UserDto {
     public static class SignUpRes {
         private String email;
         private String name;
-        @JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Seoul")
-        @DateTimeFormat(pattern="yyyyMMdd")
+//        @JsonFormat(pattern = "yyyyMMdd", timezone = "Asia/Seoul")
+//        @DateTimeFormat(pattern="yyyyMMdd")
         private Date birthday;
         private String password;
         private String phone;
