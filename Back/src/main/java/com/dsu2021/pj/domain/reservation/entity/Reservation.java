@@ -18,8 +18,4 @@ public class Reservation {
 	private Date reservationDate;
 	private int adult;
 	private int child;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dsu/yh

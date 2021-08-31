@@ -36,31 +36,19 @@ public class ReservationDto {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class ReservationRes{
-		private Long reservationindex;
-		private Long userIndex;
-		private Long roomIndex;
-		private String reservationState;
-		private int reservationPrice;
-		private Date checkinDate;
-		private Date checkoutDate;
-		private Date reservationDate;
-	}
+//	@Data
+//	@NoArgsConstructor
+//	@AllArgsConstructor
+//	public static class ReservationRes{
+//		private Long reservationindex;
+//		private Long userIndex;
+//		private Long roomIndex;
+//		private String reservationState;
+//		private int reservationPrice;
+//		private Date checkinDate;
+//		private Date checkoutDate;
+//		private Date reservationDate;
+//	}
 	
 	
 }
