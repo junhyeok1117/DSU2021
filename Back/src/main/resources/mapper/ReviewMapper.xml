@@ -6,6 +6,8 @@
 
 <mapper namespace="com.dsu2021.pj.domain.review.repository.ReviewMapper">
 
+	<!-- SELECT -->
+
 	<resultMap
 		type="com.dsu2021.pj.domain.review.dto.ReviewDTO$ReviewRes" id="reviewResult">
 		<id property="roomIndex" column="room_index"></id>
@@ -22,5 +24,11 @@
 	<select id ="getReviewsByUserIndex" resultMap="reviewResult">
 		SELECT * FROM review WHERE user_index = #{userIndex};
 	</select>
+	
+	<!-- INSERT -->
+	
+	<insert id = "insertReview">
+		
+	</insert>
 
 </mapper>

@@ -39,13 +39,31 @@ public class SearchRoomController {
 		return new ResponseEntity<>(room,HttpStatus.OK);
     }
 	
-	@GetMapping("/rooms/{roomIndex}/availableDates")
+	@GetMapping("/rooms/{roomIndex}/available-dates")
 	public ResponseEntity<Date[]> getAvailableDatesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
 		
 		
 		Date[] dates = service.getAvailableDatesByRoomIndex(roomIndex);
 		
 		return new ResponseEntity<>(dates,HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/{roomIndex}/information")
+	public ResponseEntity<RoomDTO.RoomInformationRes> getInformationByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		return new ResponseEntity<>(service.getInformationByRoomIndex(roomIndex),HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/{roomIndex}/facility")
+	public ResponseEntity<RoomDTO.RoomFacilityRes> getFacilityByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		return new ResponseEntity<>(service.getFacilityByRoomIndex(roomIndex),HttpStatus.OK);
+	}
+	
+	@GetMapping("/rooms/{roomIndex}/images")
+	public ResponseEntity<RoomDTO.RoomFacilityRes> getImagesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+		
+		return new ResponseEntity<>(service.getImagesByRoomIndex(roomIndex),HttpStatus.OK);
 	}
 
 }

@@ -18,7 +18,7 @@ public class InsertReviewController {
 	@Autowired
 	private ReviewService service;
 	
-	@PostMapping
+	@PostMapping("/reviews")
 	public ResponseEntity<?> insertReview(@RequestBody ReviewDTO.ReviewReq req){
 		try {
 			service.insertReview(req);

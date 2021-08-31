@@ -6,7 +6,7 @@
 
 <mapper namespace="com.dsu2021.pj.domain.room.repository.RoomMapper">
 
-	<!-- READ -->
+	<!-- SELECT -->
 
 	<resultMap type="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes" id="roomResult">
 		<id property="roomIndex" column="room_index"></id>
@@ -74,8 +74,16 @@
 	<select id = "getAvailableDatesByRoomIndex" resultType="Date">
 		SELECT date FROM available_date WHERE room_index = #{roomIndex} ORDER BY date ASC;
 	</select>
+	
+	<select id = "getInformationByRoomIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomInformationRes">
+		SELECT room_index roomIndex, self_check_in selfCheckIn, common_solo commonSolo FROM information WHERE room_index = #{roomIndex};
+	</select>
+	
+	<select id = "getFacilityByRoomIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomFacilityRes">
+		SELECT room_index roomIndex, bed, bath,tv, hair_dryer hairDryer,fire_extinguisher fireExtinguisher, refrigerator, microwave, cookware,park,aircon,kitchen,wifi,washing_machine washingMachine FROM facility WHERE room_index = #{roomIndex};
+	</select>
 
-		<!-- CREATE -->
+		<!-- INSERT -->
 		
 	<insert id = "insertAddress">
 		INSERT INTO room_address (si_do,si_gun_gu,eup_myeon_dong,road_name,detail_address)

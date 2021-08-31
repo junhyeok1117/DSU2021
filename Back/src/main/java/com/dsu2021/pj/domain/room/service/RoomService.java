@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
 import com.dsu2021.pj.domain.room.entity.AvailableDate;
 import com.dsu2021.pj.domain.room.entity.Category;
@@ -68,6 +70,18 @@ public class RoomService{
 		return dates;
 	}
 	
+	public RoomDTO.RoomInformationRes getInformationByRoomIndex(Long roomIndex){
+		return roomMapper.getInformationByRoomIndex(roomIndex);
+	}
+	
+	public RoomDTO.RoomFacilityRes getFacilityByRoomIndex(Long roomIndex){
+		return roomMapper.getFacilityByRoomIndex(roomIndex);
+	}
+	
+	public RoomDTO.RoomFacilityRes getImagesByRoomIndex(Long roomIndex){
+		return roomMapper.getFacilityByRoomIndex(roomIndex);
+	}
+	
 	//CREATE
 	
 	@Transactional
@@ -94,10 +108,10 @@ public class RoomService{
 		roomMapper.insertRoom(roomInfo);
 		Long roomIndex = roomMapper.getRoomIndex(roomInfo);
 		
-		//이미지 경로 DB에 저장하는 로직 작성할 것
-		if(req.getImagePaths() != null)
-		for(int i = 0 ; i < req.getImagePaths().length ; i++) {
-			roomMapper.insertRoomImagePath(new RoomImagePath(roomIndex,req.getImagePaths()[i].getImageNumber(),req.getImagePaths()[i].getImagePath()));
+		
+		MultipartFile file = req.getFile();
+		if(file != null && !file.isEmpty()) {
+			//이미지 경로 DB에 저장하는 로직 작성할 것
 		}
 		
 		roomMapper.insertFacility(new Facility(roomIndex,req.getBed(),req.getBath(),req.getTv(),req.getHairDryer(),req.getFireExtinguisher(),req.getRefrigerator(),req.getMicrowave(),req.getCookware(),req.getPark(),req.getAircon(),req.getKitchen(),req.getWifi(),req.getWashingMachine()));
@@ -112,5 +126,9 @@ public class RoomService{
 		
 		return new RoomDTO.RoomHostRes(roomIndex);
 	}
+	
+	//UPDATE
+	
+	
 	
 }

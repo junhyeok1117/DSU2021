@@ -35,6 +35,10 @@ public interface RoomMapper {
 	
 	public Date[] getAvailableDatesByRoomIndex(Long roomIndex);
 	
+	public RoomDTO.RoomInformationRes getInformationByRoomIndex(Long roomIndex);
+	
+	public RoomDTO.RoomFacilityRes getFacilityByRoomIndex(Long roomIndex);
+	
 //	CREATE
 	
 	public void insertAddress(RoomAddress req);
