@@ -7,9 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
-import com.dsu2021.pj.domain.room.dto.RoomDTO.RoomHostReq.ImagePath;
 import com.dsu2021.pj.domain.room.entity.AvailableDate;
 import com.dsu2021.pj.domain.room.entity.Category;
 import com.dsu2021.pj.domain.room.entity.Facility;
