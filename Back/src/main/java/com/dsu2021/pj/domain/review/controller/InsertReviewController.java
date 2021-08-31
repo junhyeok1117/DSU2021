@@ -21,12 +21,10 @@ public class InsertReviewController {
 	@PostMapping("/reviews")
 	public ResponseEntity<?> insertReview(@RequestBody ReviewDTO.ReviewReq req){
 		try {
-			service.insertReview(req);
+			return new ResponseEntity<>(service.insertReview(req),HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
-		
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

@@ -25,10 +25,17 @@
 		SELECT * FROM review WHERE user_index = #{userIndex};
 	</select>
 	
+	<select id = "getReviewByIndices" resultMap="reviewResult">
+		SELECT * FROM review WHERE room_index = #{roomIndex} AND user_index = #{userIndex};
+	</select>
+	
 	<!-- INSERT -->
 	
 	<insert id = "insertReview">
-		
+		INSERT INTO review 
+		(room_index,user_index,content,star_rating) 
+		VALUES 
+		(#{roomIndex},#{userIndex},#{content},#{starRating});
 	</insert>
 
 </mapper>

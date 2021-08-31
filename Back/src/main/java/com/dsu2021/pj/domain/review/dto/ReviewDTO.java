@@ -22,7 +22,6 @@ public class ReviewDTO {
 	    private Long roomIndex;
 	    private String content;
 	    private int starRating;
-	    private Date registerDate;
 	}
 	
 	

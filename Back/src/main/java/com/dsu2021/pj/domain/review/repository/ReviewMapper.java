@@ -20,6 +20,8 @@ public interface ReviewMapper {
 
 	public List<ReviewDTO.ReviewRes> getReviewsByUserIndex(Long userIndex);
 	
+	public ReviewDTO.ReviewRes getReviewByIndices(Long roomIndex,Long userIndex);
+	
 	//INSERT
 	public void insertReview(Review review);
 }

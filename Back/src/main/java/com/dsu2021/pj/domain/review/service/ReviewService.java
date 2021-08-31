@@ -14,6 +14,8 @@ import com.dsu2021.pj.domain.review.repository.ReviewMapper;
 @Service
 public class ReviewService {
 	
+	
+	//SELECT
 	@Autowired
 	private ReviewMapper reviewMapper;
 
@@ -29,16 +31,21 @@ public class ReviewService {
 		return reviews;
 	}
 	
+	public ReviewDTO.ReviewRes getReviewByIndices(Long roomIndex,Long userIndex){
+		return reviewMapper.getReviewByIndices(roomIndex,userIndex);
+	}
+	
+	//INSERT
 	@Transactional
 	public ReviewDTO.ReviewRes insertReview(ReviewDTO.ReviewReq req) {
 		
 		// 로그인 구현되면 유저정보 넣는부분 수정 필요
 		Long userIndex = 2l;
 		
-		Review review = new Review(req.getRoomIndex(),userIndex,req.getContent(),req.getStarRating(),req.getRegisterDate());
+		Review review = new Review(req.getRoomIndex(),userIndex,req.getContent(),req.getStarRating(),null);
 		reviewMapper.insertReview(review);
 		
-		return new ReviewDTO.ReviewRes(review.getRoomIndex(),userIndex,review.getContent(),review.getStarRating(),review.getRegisterDate());
+		return reviewMapper.getReviewByIndices(review.getRoomIndex(), review.getUserIndex());
 	}
 	
 }
