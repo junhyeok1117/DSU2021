@@ -16,6 +16,13 @@ public interface ReservationMapper {
 
 //	public void reservation(ReservationDto.InsertReq insertReq);
 
+	//room의 정보 추출
 	ReservationDto.RoomReq selectRoom(Long roomIndex);
+
+	//user의 정보 추출
+	ReservationDto.UserReq selectUser(String currentSession);
+
+	//예약 등록
+	void addReservation(Reservation reservation);
 
 }

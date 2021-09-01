@@ -25,6 +25,7 @@ public class CheckFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
+        //값이 없는 경우에도 null이라 뜨는 것 해결필요
         if (!session.equals(null)) {
             String a = (String) session.getAttribute("email");
             log.info(a);

@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import com.dsu2021.pj.domain.reservation.service.ReservationService;
 import com.dsu2021.pj.domain.user.dto.UserDto;
 
+import javax.servlet.http.HttpSession;
+
 @CrossOrigin(origins="*")
 @RestController
 public class ReservationController {
 	
 	@Autowired
 	private ReservationService service;
+    HttpSession session;
 	
     //예약조회
     @GetMapping ("/reservations/{index}")
@@ -35,8 +38,9 @@ public class ReservationController {
 //        3. 현재 user session을 확인하여 userindex 가져오기
 //        4. 예약 상태는 결제 대기 상태로 임시로 저장해두기
 
-//        service.reservation(insertReq);
+        String currentSession = (String) session.getAttribute("email");
 
+        service.reservation(roomIndex,insertReq,currentSession);
 
         return new ResponseEntity(HttpStatus.OK);
     }

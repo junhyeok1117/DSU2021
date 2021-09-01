@@ -33,6 +33,13 @@ public class ReservationDto {
 		private Integer cleanPrice;
 	}
 
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class UserReq{//사용자에 대한 필요한 값
+		private Long userIndex;
+		private String email;
+	}
 
 
 

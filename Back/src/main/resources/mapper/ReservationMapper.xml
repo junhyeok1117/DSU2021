@@ -6,49 +6,60 @@
 
 <mapper namespace="com.dsu2021.pj.domain.reservation.repository.ReservationMapper">
 
-	<resultMap
-			type="com.dsu2021.pj.domain.reservation.entity.Reservation" id="reservationResult">
-		<id property="reservationindex" column="reservation_index"/>
-		<result property="userIndex" column="user_index"/>
-		<result property="roomIndex" column="room_index"/>
-		<result property="reservationState" column="reservation_state"/>
-		<result property="reservationPrice" column="reservation_price"/>
-		<result property="checkinDate" column="check_in_date"/>
-		<result property="checkoutDate" column="check_out_date"/>
-		<result property="reservationDate" column="reservation_date"/>
-	</resultMap>
+    <resultMap
+            type="com.dsu2021.pj.domain.reservation.entity.Reservation" id="reservationResult">
+        <id property="reservationindex" column="reservation_index"/>
+        <result property="userIndex" column="user_index"/>
+        <result property="roomIndex" column="room_index"/>
+        <result property="reservationState" column="reservation_state"/>
+        <result property="reservationPrice" column="reservation_price"/>
+        <result property="checkinDate" column="check_in_date"/>
+        <result property="checkoutDate" column="check_out_date"/>
+        <result property="reservationDate" column="reservation_date"/>
+    </resultMap>
 
-	<resultMap type="com.dsu2021.pj.domain.room.entity.Room" id="roomResult">
-		<id property="roomIndex" column="room_index"/>
-		<result property="userIndex" column="user_index"/>
-		<result property="addressIndex" column="address_index"/>
-		<result property="categoryIndex" column="category_index"/>
-		<result property="name" column="name"/>
-		<result property="price" column="price"/>
-		<result property="cleanPrice" column="clean_price"/>
-		<result property="maxPerson" column="max_person"/>
-		<result property="content" column="content"/>
-	</resultMap>
+    <resultMap type="com.dsu2021.pj.domain.room.entity.Room" id="roomResult">
+        <id property="roomIndex" column="room_index"/>
+        <result property="userIndex" column="user_index"/>
+        <result property="addressIndex" column="address_index"/>
+        <result property="categoryIndex" column="category_index"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="cleanPrice" column="clean_price"/>
+        <result property="maxPerson" column="max_person"/>
+        <result property="content" column="content"/>
+    </resultMap>
 
-
-	<select id ="getReservationByIndex" resultMap="reservationResult">
-
-	</select>
-
-<!--예약 시 사용자가 입력할 값	-->
-<!--	<insert id="reservation">-->
-<!--		insert into reservation (check_in_date, check_out_date, adult, child)-->
-<!--		values (#{checkinDate}, #{checkoutDate}, #{adult}, #{child})-->
-<!--	</insert>-->
-
-<!--room 테이블에서 현재 선택한 숙소에 대해 가격과 청소비 조회	-->
-	<select id="selectRoom" resultMap="roomResult">
-		SELECT roomIndex, price, clean_price
-		FROM room
-		WHERE roomIndex = #{roomIndex}
-	</select>
+    <resultMap type="com.dsu2021.pj.domain.user.entity.User" id="userResult">
+        <id property="userIndex" column="user_index"/>
+        <result property="resgisterDate" column="register_date"/>
+    </resultMap>
 
 
-	
+    <select id="getReservationByIndex" resultMap="reservationResult">
+
+    </select>
+
+
+    <!--room 테이블에서 현재 선택한 숙소에 대해 가격과 청소비 조회	-->
+    <select id="selectRoom" resultMap="roomResult">
+        SELECT roomIndex, price, clean_price
+        FROM room
+        WHERE roomIndex = #{roomIndex}
+    </select>
+
+    <!--user 테이블에서 현재 session 값인 email에 대한 userIndex 조회-->
+    <select id="selectUser" resultMap="userResult">
+        SELECT userIndex, email
+        FROM user
+        WHERE email = #{currentSession}
+    </select>
+
+    <!--예약 정보들 입력-->
+    <insert id="addReservation">
+        insert into reservation (user_index, room_index, reservation_state, reservation_price, check_in_date, check_out_date, adult, child)
+        values (#{userIndex}, #{roomIndex}, #{reservationState}, #{reservationPrice}, #{checkinDate}, #{checkoutDate}, #{adult}, #{child})
+    </insert>
+
 
 </mapper>
