@@ -41,6 +41,14 @@ public class ReservationDto {
 		private String email;
 	}
 
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class CheckDate{//front에 보낼 체크인, 체크아웃 날짜
+		private Date checkinDate;
+		private Date checkoutDate;
+	}
+
 
 
 //	@Data

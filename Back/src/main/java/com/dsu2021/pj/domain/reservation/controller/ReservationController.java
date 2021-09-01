@@ -31,7 +31,7 @@ public class ReservationController {
 
     //예약요청
     @PostMapping("/reservations/{roomIndex}")
-    public ResponseEntity reservation(@PathVariable("roomIndex") Long roomIndex, @RequestBody ReservationDto.InsertReq insertReq) {
+    public ResponseEntity<ReservationDto.CheckDate> reservation(@PathVariable("roomIndex") Long roomIndex, @RequestBody ReservationDto.InsertReq insertReq) {
 
 //        1. 입력 값인 체크인, 체크아웃, 인원 수를 dto에 담기
 //        2. 현재 선택한 숙소의 index, 기본가격, 청소비 가져오기
@@ -40,9 +40,9 @@ public class ReservationController {
 
         String currentSession = (String) session.getAttribute("email");
 
-        service.reservation(roomIndex,insertReq,currentSession);
+        ReservationDto.CheckDate checkDate = service.reservation(roomIndex,insertReq,currentSession);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<> (checkDate, HttpStatus.OK);
     }
 	
 	

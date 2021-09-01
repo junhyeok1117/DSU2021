@@ -18,7 +18,7 @@ public class ReservationService {
     }
 
     //예약 요청 service
-    public void reservation(Long roomIndex, ReservationDto.InsertReq insertReq, String currentSession) {
+    public ReservationDto.CheckDate reservation(Long roomIndex, ReservationDto.InsertReq insertReq, String currentSession) {
 
         ReservationDto.RoomReq roomReqs = reservationMapper.selectRoom(roomIndex);
 
@@ -37,6 +37,9 @@ public class ReservationService {
 
         reservationMapper.addReservation(reservation);
 
+        ReservationDto.CheckDate checkDate = new ReservationDto.CheckDate(reservation.getCheckinDate(), reservation.getCheckoutDate());
+
+        return checkDate;
     }
 
 
