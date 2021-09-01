@@ -31,7 +31,7 @@ public interface RoomMapper {
 	
 	public Long getRoomCategoryIndex(Category req);
 	
-	public Long getRoomIndex(Room room);
+	public Long getLatestRoomIndex(Room room);
 	
 	public Date[] getAvailableDatesByRoomIndex(Long roomIndex);
 	
@@ -58,5 +58,14 @@ public interface RoomMapper {
 	public void insertInformation(Information information);
 	
 	public void insertAvailableDate(AvailableDate availableDate);
+	
+// PATCH
+	
+	
+	
+	
+// PUT
+	
+	
 
 }
