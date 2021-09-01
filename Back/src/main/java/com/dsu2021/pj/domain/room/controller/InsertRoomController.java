@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
@@ -25,9 +27,7 @@ public class InsertRoomController {
 	
 	@PostMapping("/rooms")
 	public ResponseEntity<?> insertRoom(@RequestBody Temp temp){
-		
 		// 입력 파라미터 불일치 조정 작업
-		
 		String[] jibun = {null,null,null};
 		jibun = temp.getJibunAddress().split(" ");
 		
@@ -37,7 +37,7 @@ public class InsertRoomController {
 				jibun[2],
 				temp.getRoadAddress(),
 				temp.getDetailAddress(),
-				temp.getFile(),
+				null,//file,
 				temp.getNumOfBed(),
 				temp.getNumOfBath(),
 				temp.getFacility().getTv(),
@@ -63,8 +63,6 @@ public class InsertRoomController {
 				temp.getContent()
 		);
 		
-		
-		
 		// 호출
 		
 		RoomDTO.RoomHostRes res =  service.insertRoom(req);
@@ -72,7 +70,7 @@ public class InsertRoomController {
 		if(res == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-
+		
 		return new ResponseEntity<>(res.getRoomIndex(),HttpStatus.OK);
 	}
 	
@@ -80,7 +78,36 @@ public class InsertRoomController {
 	
 	
 	
-
+	//@PostMapping("/rooms")
+//	public ResponseEntity<?> insertRoom(@RequestBody Temp temp){
+	
+	//}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 파라미터가 안 맞아서 임시
 	@Data
@@ -100,13 +127,11 @@ public class InsertRoomController {
 		private String roadAddress;//
 		private String roomname;//
 		
-		private MultipartFile file;//
+		
 		@Data
 		@NoArgsConstructor
 		@AllArgsConstructor
 		public static class TempFacility{//
-			private Integer bed;
-			private Integer bath;
 			private String tv;
 			private String hairDryer;
 			private String fireExtinguisher;

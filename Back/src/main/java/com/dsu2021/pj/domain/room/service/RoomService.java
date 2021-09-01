@@ -122,10 +122,10 @@ public class RoomService{
 		Long roomIndex = roomMapper.getLatestRoomIndex(roomInfo);
 		
 		
-		MultipartFile file = req.getFile();
-		if(file != null && !file.isEmpty()) {
-			//이미지 경로 DB에 저장하는 로직 작성할 것
-		}
+//		MultipartFile file = req.getFile();
+//		if(file != null && !file.isEmpty()) {
+//			//이미지 경로 DB에 저장하는 로직 작성할 것
+//		}
 		
 		roomMapper.insertFacility(new Facility(roomIndex,req.getBed(),req.getBath(),req.getTv(),req.getHairDryer(),req.getFireExtinguisher(),req.getRefrigerator(),req.getMicrowave(),req.getCookware(),req.getPark(),req.getAircon(),req.getKitchen(),req.getWifi(),req.getWashingMachine()));
 		roomMapper.insertInformation(new Information(roomIndex,req.getSelfCheckIn(),req.getCommonSolo()));
@@ -135,7 +135,7 @@ public class RoomService{
 			roomMapper.insertAvailableDate(new AvailableDate(roomIndex,req.getAvailableDates()[i] ));
 		}
 		
-		//이미지 저장 로직 작성할 것
+//		System.out.println(req.getFile());//이미지 저장 로직 작성할 것
 		
 		return new RoomDTO.RoomHostRes(roomIndex);
 	}
