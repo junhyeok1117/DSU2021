@@ -58,5 +58,14 @@ public interface RoomMapper {
 	public void insertInformation(Information information);
 	
 	public void insertAvailableDate(AvailableDate availableDate);
+	
+// PATCH
+	
+	
+	
+	
+// PUT
+	
+	
 
 }

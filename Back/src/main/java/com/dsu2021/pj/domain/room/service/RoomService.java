@@ -112,7 +112,7 @@ public class RoomService{
 			categoryIndex = roomMapper.getRoomCategoryIndex(categoryInfo);
 		}
 		
-		Long userIndex = 1l;// 로그인 구현되면 그에 맞게 index가져오도록 수정 필요
+		Long userIndex = 10l;// 로그인 구현되면 그에 맞게 index가져오도록 수정 필요
 		if(hostMapper.getHostByUserIndex(userIndex) == null)
 			hostMapper.addHost(userIndex);
 		

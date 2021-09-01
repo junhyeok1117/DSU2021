@@ -24,7 +24,7 @@ public class InsertRoomController {
 	
 	
 	@PostMapping("/rooms")
-	public ResponseEntity<?> insertRoom(@RequestParam MultipartFile file,@RequestBody Temp temp){
+	public ResponseEntity<?> insertRoom(@RequestBody Temp temp){
 		
 		// 입력 파라미터 불일치 조정 작업
 		

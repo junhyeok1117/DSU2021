@@ -11,12 +11,12 @@ import com.dsu2021.pj.domain.room.service.RoomService;
 @CrossOrigin(origins="*")
 @RestController
 public class PatchRoomController {
+	
 	@Autowired
 	private RoomService service;
 		
 	@PatchMapping("")
-	public ResponseEntity<?> g(){
-	
+	public ResponseEntity<?> tmp(){
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 		
