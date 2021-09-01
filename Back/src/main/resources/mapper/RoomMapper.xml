@@ -58,7 +58,7 @@
 		kind = #{kind};
 	</select>
 	
-	<select id = "getRoomIndex" resultType="Long">
+	<select id = "getLatestRoomIndex" resultType="Long">
  		SELECT room_index FROM room WHERE
 		address_index = #{addressIndex} AND
 		category_index = #{categoryIndex} AND

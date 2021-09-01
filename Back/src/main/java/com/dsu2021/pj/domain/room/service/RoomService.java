@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dsu2021.pj.domain.host.repository.HostMapper;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
 import com.dsu2021.pj.domain.room.entity.AvailableDate;
 import com.dsu2021.pj.domain.room.entity.Category;
@@ -27,6 +28,8 @@ public class RoomService{
 	
 	@Autowired
 	private RoomMapper roomMapper;
+	@Autowired
+	private HostMapper hostMapper;
 	
 	public List<RoomDTO.RoomRes> search15Rooms(Integer page, RoomDTO.RoomReq req){
 		Integer index = ( page - 1 ) * 15;
@@ -110,11 +113,13 @@ public class RoomService{
 		}
 		
 		Long userIndex = 1l;// 로그인 구현되면 그에 맞게 index가져오도록 수정 필요
+		if(hostMapper.getHostByUserIndex(userIndex) == null)
+			hostMapper.addHost(userIndex);
 		
 		Room roomInfo = new Room(null,userIndex,addressIndex,categoryIndex,req.getName(),req.getPrice(),req.getCleanPrice(),req.getMaxPerson(),req.getContent());
 
 		roomMapper.insertRoom(roomInfo);
-		Long roomIndex = roomMapper.getRoomIndex(roomInfo);
+		Long roomIndex = roomMapper.getLatestRoomIndex(roomInfo);
 		
 		
 		MultipartFile file = req.getFile();
