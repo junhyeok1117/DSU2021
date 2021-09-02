@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
-import com.dsu2021.pj.domain.room.entity.AvailableDate;
+import com.dsu2021.pj.domain.room.entity.UnAvailableDate;
 import com.dsu2021.pj.domain.room.entity.Category;
 import com.dsu2021.pj.domain.room.entity.Facility;
 import com.dsu2021.pj.domain.room.entity.Information;
@@ -33,7 +33,7 @@ public interface RoomMapper {
 	
 	public Long getLatestRoomIndex(Room room);
 	
-	public Date[] getAvailableDatesByRoomIndex(Long roomIndex);
+	public Date[] getUnAvailableDatesByRoomIndex(Long roomIndex);
 	
 	public RoomDTO.RoomInformationRes getInformationByRoomIndex(Long roomIndex);
 	
@@ -57,15 +57,14 @@ public interface RoomMapper {
 	
 	public void insertInformation(Information information);
 	
-	public void insertAvailableDate(AvailableDate availableDate);
+	public void insertUnAvailableDate(UnAvailableDate availableDate);
 	
 // PATCH
-	
 	
 	
 	
 // PUT
 	
 	
-
+	
 }

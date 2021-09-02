@@ -39,11 +39,11 @@ public class SearchRoomController {
 		return new ResponseEntity<>(room,HttpStatus.OK);
     }
 	
-	@GetMapping("/rooms/{roomIndex}/available-dates")
-	public ResponseEntity<Date[]> getAvailableDatesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+	@GetMapping("/rooms/{roomIndex}/unavailable-dates")
+	public ResponseEntity<Date[]> getUnAvailableDatesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
 		
 		
-		Date[] dates = service.getAvailableDatesByRoomIndex(roomIndex);
+		Date[] dates = service.getUnAvailableDatesByRoomIndex(roomIndex);
 		
 		return new ResponseEntity<>(dates,HttpStatus.OK);
 	}

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,10 +79,10 @@ public class InsertRoomController {
 	
 	
 	
-	//@PostMapping("/rooms")
-//	public ResponseEntity<?> insertRoom(@RequestBody Temp temp){
-	
-	//}
+	@PostMapping("/rooms/{roomIndex}/images")
+	public ResponseEntity<?> insertRoomImages(@PathVariable Long roomIndex,@RequestParam MultipartFile file){
+		return new ResponseEntity<>(service.insertImages(roomIndex,file),HttpStatus.OK);
+	}
 	
 	
 	
