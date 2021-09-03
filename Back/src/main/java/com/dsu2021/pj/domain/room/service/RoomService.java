@@ -151,6 +151,13 @@ public class RoomService{
 		
 		return null;
 	}
+
+	public Long insertUnavailableDate(Long roomIndex, Date[] unavailableDate) {
+		if(unavailableDate != null) 
+			for(Date date : unavailableDate)
+				roomMapper.insertUnavailableDate(new UnAvailableDate(roomIndex,date));
+		return roomIndex;
+	}
 	
 	//UPDATE
 	

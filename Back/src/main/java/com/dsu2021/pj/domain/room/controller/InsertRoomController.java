@@ -1,5 +1,7 @@
 package com.dsu2021.pj.domain.room.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -84,7 +86,10 @@ public class InsertRoomController {
 		return new ResponseEntity<>(service.insertImages(roomIndex,file),HttpStatus.OK);
 	}
 	
-	
+	@PostMapping("rooms/{roomIndex}/unavailable-date")
+	public ResponseEntity<?> insertUnavailableDate(@PathVariable Long roomIndex,@RequestParam Date[] unavailableDate){
+		return new ResponseEntity<>(service.insertUnavailableDate(roomIndex,unavailableDate),HttpStatus.OK);
+	}
 	
 	
 	
