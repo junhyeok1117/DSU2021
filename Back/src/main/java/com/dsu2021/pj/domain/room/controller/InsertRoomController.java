@@ -88,7 +88,7 @@ public class InsertRoomController {
 	
 	@PostMapping("rooms/{roomIndex}/unavailable-date")
 	public ResponseEntity<?> insertUnavailableDate(@PathVariable Long roomIndex,@RequestParam Date[] unavailableDate){
-		return new ResponseEntity<>(service.insertUnavailableDate(roomIndex,unavailableDate),HttpStatus.OK);
+		return null;//new ResponseEntity<>(service.insertUnavailableDate(roomIndex,unavailableDate),HttpStatus.OK);
 	}
 	
 	

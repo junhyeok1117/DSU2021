@@ -81,9 +81,9 @@ public class RoomDTO {
 		private String kind="";
 		private String siDo="";
 		private String siGunGu="";
-		@DateTimeFormat(pattern="yyyy-MM-dd")
+		//@DateTimeFormat(pattern="yyyy-MM-dd")
 		private Date checkInDate;
-		@DateTimeFormat(pattern="yyyy-MM-dd")
+		//@DateTimeFormat(pattern="yyyy-MM-dd")
 		private Date checkOutDate;
 		private Integer maxPerson=0;
 		
