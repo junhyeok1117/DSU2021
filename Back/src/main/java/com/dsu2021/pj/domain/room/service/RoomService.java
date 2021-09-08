@@ -45,8 +45,10 @@ public class RoomService{
 				return rooms;
 			} catch (ParseException e) {
 				// 일어날리 없는 에러
+				e.printStackTrace();
 			}
 		}
+		
 		
 		Long differenceTime = req.getCheckInDate().getTime() - req.getCheckOutDate().getTime();
 		int differenceDay = (int) Math.abs(differenceTime/(24*60*60*1000));
@@ -54,7 +56,7 @@ public class RoomService{
 		if( differenceTime >= 0 || differenceDay < 1)
 			throw new Exception(); // 임시로 에러 발생
 		
-		Date dateForCheckOut = new Date(req.getCheckOutDate().getTime() - (1000*60*60*24)  );
+		Date dateForCheckOut = new Date(req.getCheckOutDate().getTime() - (1000*60*60*24) + (1000*60*60*9) ); // 9시간 더해 줍니다.
 		req = new RoomDTO.RoomReq(req, req.getCheckInDate(), dateForCheckOut);
 		
 		rooms = roomMapper.search15Rooms(index,req);

@@ -25,7 +25,7 @@ public class SearchRoomController {
 	private RoomService service;
 	
 	@GetMapping("/rooms/page/{page}")
-    public ResponseEntity<List<RoomDTO.RoomRes>> getRoomsByPage(@PathVariable("page") Integer page, @RequestBody RoomDTO.RoomReq req) throws Exception{
+    public ResponseEntity<List<RoomDTO.RoomRes>> getRoomsByPage(@PathVariable("page") Integer page, @ModelAttribute RoomDTO.RoomReq req) throws Exception {
         
 		List<RoomDTO.RoomRes> rooms;
 		
