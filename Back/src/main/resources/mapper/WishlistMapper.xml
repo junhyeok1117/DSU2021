@@ -6,5 +6,11 @@
 
 <mapper namespace="com.dsu2021.pj.domain.wishlist.repository.WishlistMapper">
 	
-
+	<select id="getWishlistsByUserIndex" resultType="com.dsu2021.pj.domain.wishlist.dto.WishlistDTO$WishlistRes">
+		SELECT room_index roomIndex, user_index userIndex, wishlist_name wishlistName FROM wishlist WHERE user_index = #{userIndex};
+	</select>
+	
+	<select id="getWishlistsByUserIndexAndWishlistName" resultType="com.dsu2021.pj.domain.wishlist.dto.WishlistDTO$WishlistRes">
+		SELECT room_index roomIndex, user_index userIndex, wishlist_name wishlistName FROM wishlist WHERE user_index = #{userIndex} AND wishlist_name = #{wishlistName};
+	</select>
 </mapper>

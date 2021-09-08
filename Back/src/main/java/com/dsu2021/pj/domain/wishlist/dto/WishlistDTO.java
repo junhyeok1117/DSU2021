@@ -19,5 +19,14 @@ public class WishlistDTO {
 		private String wishlistName;
 	}
 	
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class WishlistRes{
+		private Long roomIndex;
+		private Long userIndex;
+		private String wishlistName;
+	}
+	
 
 }
