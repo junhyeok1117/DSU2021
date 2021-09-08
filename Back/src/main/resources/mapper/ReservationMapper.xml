@@ -43,14 +43,14 @@
 
     <!--room 테이블에서 현재 선택한 숙소에 대해 가격과 청소비 조회	-->
     <select id="selectRoom" resultMap="roomResult">
-        SELECT roomIndex, price, clean_price
+        SELECT room_index roomIndex, price, clean_price cleanPrice
         FROM room
-        WHERE roomIndex = #{roomIndex}
+        WHERE room_index = #{roomIndex}
     </select>
 
     <!--user 테이블에서 현재 session 값인 email에 대한 userIndex 조회-->
     <select id="selectUser" resultMap="userResult">
-        SELECT userIndex, email
+        SELECT user_index userIndex, email
         FROM user
         WHERE email = #{currentSession}
     </select>
