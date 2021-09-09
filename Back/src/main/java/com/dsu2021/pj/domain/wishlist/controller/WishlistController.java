@@ -1,5 +1,7 @@
 package com.dsu2021.pj.domain.wishlist.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dsu2021.pj.domain.wishlist.dto.WishlistDTO;
 import com.dsu2021.pj.domain.wishlist.service.WishlistService;
 
 
@@ -23,20 +26,22 @@ public class WishlistController { // 위시리스트 이름을 테이블로 따�
 	@GetMapping("/users/{userIndex}/wishlists")
     public ResponseEntity<?> getWishlistsByUserIndex(@PathVariable Long userIndex){
         
-
-		return new ResponseEntity<>(HttpStatus.OK);
+		List<WishlistDTO.WishlistRes> wishlists = service.getWishlistsByUserIndex(userIndex);
+		
+		
+		return new ResponseEntity<>(wishlists,HttpStatus.OK);
     }
 	
-	//GET
-		@GetMapping("/users/{userIndex}/wishlists/{wishlistName}")
-	    public ResponseEntity<?> getWishlistsByUserIndex(@PathVariable Long userIndex,@PathVariable Long wishlistName){
-	        
-
-			return new ResponseEntity<>(HttpStatus.OK);
-	    }
+	@GetMapping("/users/{userIndex}/wishlists/name/{wishlistName}")
+	public ResponseEntity<?> getWishlistsByUserIndexAndWishlistName(@PathVariable Long userIndex,@PathVariable String wishlistName){
+		
+		List<WishlistDTO.WishlistRes> wishlists = service.getWishlistsByUserIndexAndWishlistName(userIndex,wishlistName);
+		
+		return new ResponseEntity<>(wishlists,HttpStatus.OK);
+	}
 	
 	
 	//POST
-
+	
 	
 }

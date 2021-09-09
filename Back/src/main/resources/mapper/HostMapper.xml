@@ -11,6 +11,10 @@
 	<select id = "getHostByUserIndex" resultType="com.dsu2021.pj.domain.host.entity.Host">
 		SELECT user_index userIndex, start_date startDate FROM host WHERE user_index = #{userIndex};
 	</select>
+	
+	<select id = "getStartDateByUserIndex" resultType="String">
+		SELECT start_date FROM host WHERE user_index = #{userIndex};
+	</select>
 
 	<!-- INSERT -->
 		

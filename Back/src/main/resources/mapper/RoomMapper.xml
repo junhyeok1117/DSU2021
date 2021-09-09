@@ -20,28 +20,28 @@
 		<result property="content" column="content"></result>
 	</resultMap>
 
-		<select id="search15Rooms" resultMap="roomResult">
-			SELECT *
-			FROM room 
-			WHERE room_index IN
-			(
-				SELECT room_index FROM room WHERE
-				room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${req.location}%' AND kind LIKE '%${req.kind}%')
-				AND room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '%${req.siDo}%' AND si_gun_gu LIKE '%${req.siGunGu}%')
-				AND room.room_index IN (SELECT available_date.room_index FROM available_date WHERE date BETWEEN #{req.checkInDate} AND #{req.checkOutDate} GROUP BY room_index HAVING COUNT(room_index) >= ${differenceDay})
-				AND room.max_person > ${req.maxPerson}
-			)
-			ORDER BY room.room_index DESC
-			LIMIT ${index},15;
-		</select>
+	<select id="search15Rooms" resultMap="roomResult">
+		SELECT *
+		FROM room 
+		WHERE room_index IN
+		(
+			SELECT room_index FROM room WHERE
+			room.category_index IN (SELECT category_index FROM category WHERE location LIKE '%${req.location}%' AND kind LIKE '%${req.kind}%')
+			AND room.address_index IN (SELECT room_address_index FROM room_address WHERE si_do LIKE '%${req.siDo}%' AND si_gun_gu LIKE '%${req.siGunGu}%')
+			AND room.room_index NOT IN (SELECT room_index FROM unavailable_date WHERE date BETWEEN #{req.checkInDate} AND #{req.checkOutDate} )
+			AND room.max_person >= ${req.maxPerson}
+		)
+		ORDER BY room.room_index DESC
+		LIMIT ${index},15;
+	</select>
 
-        <select id="getRoomByIndex" resultMap="roomResult">
-			SELECT * FROM room WHERE room_index = #{roomIndex};
-		</select>		
+	<select id="getRoomByIndex" resultMap="roomResult">
+		SELECT * FROM room WHERE room_index = #{roomIndex};
+	</select>		
 
-		<select id="get15RoomsFromIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes"> <!-- 이걸 사용하는 곳이 아직 없음 -->
-			SELECT * FROM room ORDER BY room_index DESC LIMIT ${index},15;
-		</select>
+	<select id="get15RoomsFromIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomRes"> <!-- 이걸 사용하는 곳이 아직 없음 -->
+		SELECT * FROM room ORDER BY room_index DESC LIMIT ${index},15;
+	</select>
 	
 	<select id = "getRoomAddressIndex" resultType="Long">
 		SELECT room_address_index FROM room_address WHERE
@@ -71,8 +71,8 @@
 		ORDER BY room_index DESC LIMIT 0,1;
 	</select>
 	
-	<select id = "getAvailableDatesByRoomIndex" resultType="Date">
-		SELECT date FROM available_date WHERE room_index = #{roomIndex} ORDER BY date ASC;
+	<select id = "getUnAvailableDatesByRoomIndex" resultType="Date">
+		SELECT date FROM unavailable_date WHERE room_index = #{roomIndex} ORDER BY date ASC;
 	</select>
 	
 	<select id = "getInformationByRoomIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomInformationRes">
@@ -90,6 +90,14 @@
 	<select id = "getCategoryByCategoryIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomCategoryRes">
 		SELECT category_index categoryIndex, location, kind FROM category WHERE category_index = #{categoryIndex};
 	</select>
+	
+<!-- 	<select id = "test" resultType="com.dsu2021.pj.domain.room.dto.TestDTO">
+		SELECT #{a} a, #{b} b, date c, date d, room_index e FROM unavailable_date;
+	</select>
+	
+	<insert id = "tesst">
+		INSERT INTO unavailable_date (room_index,date) VALUES (2,#{a})
+	</insert> -->
 	
 		<!-- INSERT -->
 		
@@ -121,8 +129,8 @@
 		INSERT INTO information (room_index,self_check_in,common_solo) VALUES (#{roomIndex},#{selfCheckIn},#{commonSolo});
 	</insert>
 	
-	<insert id = "insertAvailableDate">
-		INSERT INTO available_date (room_index,date) VALUES (#{roomIndex},#{date});
+	<insert id = "insertUnAvailableDate">
+		INSERT INTO unavailable_date (room_index,date) VALUES (#{roomIndex},#{date});
 	</insert>
 
 </mapper>

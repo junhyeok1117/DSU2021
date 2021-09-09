@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import com.dsu2021.pj.domain.room.service.RoomService;
 
@@ -15,8 +16,8 @@ public class PatchRoomController {
 	@Autowired
 	private RoomService service;
 		
-	@PatchMapping("")
-	public ResponseEntity<?> tmp(){
+	@PatchMapping("/rooms/{roomIndex}")
+	public ResponseEntity<?> tmp(@PathVariable Long roomIndex){
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 		

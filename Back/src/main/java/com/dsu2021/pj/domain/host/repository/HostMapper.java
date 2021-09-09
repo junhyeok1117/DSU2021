@@ -12,6 +12,8 @@ public interface HostMapper {
 //	READ
 	public Host getHostByUserIndex(Long userIndex);
 	
+	public String getStartDateByUserIndex(Long userIndex);
+	
 //	CRATE
 	public void addHost(Long userIndex);
 }

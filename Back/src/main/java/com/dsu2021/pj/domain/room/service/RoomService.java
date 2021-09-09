@@ -11,13 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dsu2021.pj.domain.host.repository.HostMapper;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
-import com.dsu2021.pj.domain.room.entity.AvailableDate;
+import com.dsu2021.pj.domain.room.dto.TestDTO;
+import com.dsu2021.pj.domain.room.entity.UnAvailableDate;
 import com.dsu2021.pj.domain.room.entity.Category;
 import com.dsu2021.pj.domain.room.entity.Facility;
 import com.dsu2021.pj.domain.room.entity.Information;
 import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.room.entity.RoomAddress;
-import com.dsu2021.pj.domain.room.entity.RoomImagePath;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
 
@@ -31,26 +31,35 @@ public class RoomService{
 	@Autowired
 	private HostMapper hostMapper;
 	
-	public List<RoomDTO.RoomRes> search15Rooms(Integer page, RoomDTO.RoomReq req){
+	public List<RoomDTO.RoomRes> search15Rooms(Integer page, RoomDTO.RoomReq req) throws Exception{
 		Integer index = ( page - 1 ) * 15;
-		
+
 		List<RoomDTO.RoomRes> rooms;
 		
-		if(req.getCheckInDate() == null || req.getCheckOutDate() == null) {
+		if(req.getCheckInDate() == null || req.getCheckOutDate() == null) { // 시간 입력 없을 때
 			try {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-				req = new RoomDTO.RoomReq(req,sdf.parse("0000.01.01"),sdf.parse("9999.12.31"));
-				rooms = roomMapper.search15Rooms(index, req, 0);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+				req = new RoomDTO.RoomReq(req,sdf.parse("0000.01.01 00:00:00"),sdf.parse("0000.01.01 00:00:00"));
+				
+				rooms = roomMapper.search15Rooms(index, req);
 				return rooms;
 			} catch (ParseException e) {
 				// 일어날리 없는 에러
+				e.printStackTrace();
 			}
 		}
+		
 		
 		Long differenceTime = req.getCheckInDate().getTime() - req.getCheckOutDate().getTime();
 		int differenceDay = (int) Math.abs(differenceTime/(24*60*60*1000));
 		
-		rooms = roomMapper.search15Rooms(index,req,differenceDay);
+		if( differenceTime >= 0 || differenceDay < 1)
+			throw new Exception(); // 임시로 에러 발생
+		
+		Date dateForCheckOut = new Date(req.getCheckOutDate().getTime() - (1000*60*60*24) + (1000*60*60*9) ); // 9시간 더해 줍니다.
+		req = new RoomDTO.RoomReq(req, req.getCheckInDate(), dateForCheckOut);
+		
+		rooms = roomMapper.search15Rooms(index,req);
 		
 		return rooms;
 	}
@@ -66,9 +75,9 @@ public class RoomService{
 		return rooms;
 	}
 	
-	public Date[] getAvailableDatesByRoomIndex(Long roomIndex) {
+	public Date[] getUnAvailableDatesByRoomIndex(Long roomIndex) {
 		
-		Date[] dates = roomMapper.getAvailableDatesByRoomIndex(roomIndex);
+		Date[] dates = roomMapper.getUnAvailableDatesByRoomIndex(roomIndex);
 		
 		return dates;
 	}
@@ -92,6 +101,14 @@ public class RoomService{
 	public RoomDTO.RoomCategoryRes getCategoryByCategoryIndex(Long categoryIndex){
 		return roomMapper.getCategoryByCategoryIndex(categoryIndex);
 	}
+	
+//	public TestDTO[] test(Date a,Date b) {
+//		return roomMapper.test(a,b);
+//	}
+//	
+//	public void tet(TestDTO sss) {
+//		roomMapper.tesst(sss);
+//	}
 	
 	//CREATE
 	
@@ -130,9 +147,9 @@ public class RoomService{
 		roomMapper.insertFacility(new Facility(roomIndex,req.getBed(),req.getBath(),req.getTv(),req.getHairDryer(),req.getFireExtinguisher(),req.getRefrigerator(),req.getMicrowave(),req.getCookware(),req.getPark(),req.getAircon(),req.getKitchen(),req.getWifi(),req.getWashingMachine()));
 		roomMapper.insertInformation(new Information(roomIndex,req.getSelfCheckIn(),req.getCommonSolo()));
 		
-		if(req.getAvailableDates() != null)
-		for(int i = 0 ; i < req.getAvailableDates().length ; i++) {
-			roomMapper.insertAvailableDate(new AvailableDate(roomIndex,req.getAvailableDates()[i] ));
+		if(req.getUnAvailableDates() != null)
+		for(int i = 0 ; i < req.getUnAvailableDates().length ; i++) {
+			roomMapper.insertUnAvailableDate( new UnAvailableDate(roomIndex,req.getUnAvailableDates()[i] ));
 		}
 		
 //		System.out.println(req.getFile());//이미지 저장 로직 작성할 것
@@ -140,8 +157,28 @@ public class RoomService{
 		return new RoomDTO.RoomHostRes(roomIndex);
 	}
 	
+	
+	public RoomDTO.RoomImageRes insertImages(Long roomIndex,MultipartFile file){
+		
+		String fileName = file.getOriginalFilename();
+		String path = roomIndex+"/"+fileName;
+		
+		System.out.println(file.getOriginalFilename());
+		System.out.println(path);
+		
+		return null;
+	}
+
+//	public Long insertUnavailableDate(Long roomIndex, Date[] unavailableDate) {
+//		if(unavailableDate != null) 
+//			for(Date date : unavailableDate)
+//				//roomMapper.insertUnavailableDate(new UnAvailableDate(roomIndex,date));
+//		return roomIndex;
+//	}
+	
 	//UPDATE
 	
 	
+	//DELETE
 	
 }
