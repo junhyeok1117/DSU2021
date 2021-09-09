@@ -39,13 +39,10 @@ public class ReservationService {
 
 
         reservationMapper.addReservation(reservation);
-<<<<<<< HEAD
 
         ReservationDto.CheckDate checkDate = new ReservationDto.CheckDate(reservation.getCheckinDate(), reservation.getCheckoutDate());
 
         return checkDate;
-=======
->>>>>>> dsu/yh
     }
 
 
