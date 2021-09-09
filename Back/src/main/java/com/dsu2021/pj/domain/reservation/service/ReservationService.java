@@ -2,6 +2,8 @@ package com.dsu2021.pj.domain.reservation.service;
 
 import com.dsu2021.pj.domain.reservation.dto.ReservationDto;
 import com.dsu2021.pj.domain.reservation.entity.Reservation;
+import com.dsu2021.pj.domain.room.entity.Room;
+import com.dsu2021.pj.domain.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,17 @@ public class ReservationService {
     @Autowired
     private ReservationMapper reservationMapper;
 
+    //예약조회 service
     public void getReservationByIndex(Long index) {
 
     }
 
-    //예약 요청 service
+    //예약요청 service
     public ReservationDto.CheckDate reservation(Long roomIndex, ReservationDto.InsertReq insertReq, String currentSession) {
 
-        ReservationDto.RoomReq roomReqs = reservationMapper.selectRoom(roomIndex);
+        Room roomReqs = reservationMapper.selectRoom(roomIndex);
 
-        ReservationDto.UserReq userReq = reservationMapper.selectUser(currentSession);
+        User userReq = reservationMapper.selectUser(currentSession);
 
         //체크인과 체크아웃의 시간 차이를 구하여 이용 날짜를 구함
         long date = insertReq.getCheckinDate().getTime() - insertReq.getCheckoutDate().getTime();//날짜를 숫자데이터로 변환하여 계산
