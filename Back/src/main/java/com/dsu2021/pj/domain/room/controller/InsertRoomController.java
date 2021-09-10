@@ -83,12 +83,12 @@ public class InsertRoomController {
 	
 	@PostMapping("/rooms/{roomIndex}/images")
 	public ResponseEntity<?> insertRoomImages(@PathVariable Long roomIndex,@RequestParam MultipartFile file){
-		return new ResponseEntity<>(service.insertImages(roomIndex,file),HttpStatus.OK);
+		return new ResponseEntity<>(service.insertRoomImages(roomIndex,file),HttpStatus.OK);
 	}
 	
 	@PostMapping("rooms/{roomIndex}/unavailable-date")
-	public ResponseEntity<?> insertUnavailableDate(@PathVariable Long roomIndex,@RequestParam Date[] unavailableDate){
-		return null;//new ResponseEntity<>(service.insertUnavailableDate(roomIndex,unavailableDate),HttpStatus.OK);
+	public ResponseEntity<?> insertUnAvailableDate(@PathVariable Long roomIndex,@RequestBody Date[] unavailableDates){
+		return new ResponseEntity<>(service.insertUnAvailableDate(roomIndex,unavailableDates),HttpStatus.OK);
 	}
 	
 	

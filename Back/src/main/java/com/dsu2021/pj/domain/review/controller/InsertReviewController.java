@@ -23,6 +23,7 @@ public class InsertReviewController {
 		try {
 			return new ResponseEntity<>(service.insertReview(req),HttpStatus.OK);
 		}catch(Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 	}

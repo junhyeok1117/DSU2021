@@ -1,5 +1,7 @@
 package com.dsu2021.pj.domain.room.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dsu2021.pj.domain.host.repository.HostMapper;
@@ -20,6 +23,8 @@ import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.room.entity.RoomAddress;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
+
+import ch.qos.logback.core.util.FileUtil;
 
 @Service
 public class RoomService{
@@ -158,23 +163,42 @@ public class RoomService{
 	}
 	
 	
-	public RoomDTO.RoomImageRes insertImages(Long roomIndex,MultipartFile file){
-		
-		String fileName = file.getOriginalFilename();
-		String path = roomIndex+"/"+fileName;
-		
-		System.out.println(file.getOriginalFilename());
-		System.out.println(path);
+	public RoomDTO.RoomImageRes insertRoomImages(Long roomIndex,MultipartFile file){
+		try {
+			if(null==roomMapper.getRoomByIndex(roomIndex))
+				System.out.println("");
+			
+			Long userIndex = 2l; // 로그인 구현되면 수정할 것
+			String fileName = file.getOriginalFilename();
+			String path = "C:\\Users\\user\\Desktop\\Images\\roomImages\\" + roomIndex;
+			
+			File folder = new File(path);
+			if(!folder.exists())
+				folder.mkdir();
+			folder = new File(path+"\\"+userIndex);
+			if(!folder.exists())
+				folder.mkdir();
+			
+			File target = new File(path+"\\"+userIndex, fileName);
+			FileCopyUtils.copy(file.getBytes(), target);
+			
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
 
-//	public Long insertUnavailableDate(Long roomIndex, Date[] unavailableDate) {
-//		if(unavailableDate != null) 
-//			for(Date date : unavailableDate)
-//				//roomMapper.insertUnavailableDate(new UnAvailableDate(roomIndex,date));
-//		return roomIndex;
-//	}
+	public Long insertUnAvailableDate(Long roomIndex, Date[] unavailableDates) {
+		
+		if(unavailableDates != null) 
+			for(Date date : unavailableDates)
+				roomMapper.insertUnAvailableDate(new UnAvailableDate(roomIndex,date));
+		
+		return roomIndex;
+	}
 	
 	//UPDATE
 	
