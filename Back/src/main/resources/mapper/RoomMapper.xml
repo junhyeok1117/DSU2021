@@ -132,5 +132,11 @@
 	<insert id = "insertUnAvailableDate">
 		INSERT INTO unavailable_date (room_index,date) VALUES (#{roomIndex},#{date});
 	</insert>
+	
+		<!-- DELETE -->
+		
+	<delete id = "deleteUnAvailableDateByRoomIndex">
+		DELETE FROM unavailable_date WHERE room_index = #{roomIndex};
+	</delete>
 
 </mapper>

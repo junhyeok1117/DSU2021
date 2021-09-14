@@ -66,9 +66,11 @@ public interface RoomMapper {
 	
 // PATCH
 	
-	
-	
 // PUT
+	
+// DELETE
+	
+	public void deleteUnAvailableDateByRoomIndex(Long roomIndex);
 	
 	
 	

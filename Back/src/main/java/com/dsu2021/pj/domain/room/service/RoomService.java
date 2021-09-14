@@ -7,14 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.dsu2021.pj.domain.host.repository.HostMapper;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
-import com.dsu2021.pj.domain.room.dto.TestDTO;
 import com.dsu2021.pj.domain.room.entity.UnAvailableDate;
 import com.dsu2021.pj.domain.room.entity.Category;
 import com.dsu2021.pj.domain.room.entity.Facility;
@@ -24,10 +27,16 @@ import com.dsu2021.pj.domain.room.entity.RoomAddress;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
 
-import ch.qos.logback.core.util.FileUtil;
-
 @Service
 public class RoomService{
+	
+    // 버킷 이름 동적 할당
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucketName;
+
+    @Autowired
+    private AmazonS3Client amazonS3Client;
+    
 	
 	//READ
 	
@@ -166,10 +175,10 @@ public class RoomService{
 	public RoomDTO.RoomImageRes insertRoomImages(Long roomIndex,MultipartFile file){
 		try {
 			if(null==roomMapper.getRoomByIndex(roomIndex))
-				System.out.println("");
+				return null;
 			
 			Long userIndex = 2l; // 로그인 구현되면 수정할 것
-			String fileName = file.getOriginalFilename();
+			final String fileName = file.getOriginalFilename();
 			String path = "C:\\Users\\user\\Desktop\\Images\\roomImages\\" + roomIndex;
 			
 			File folder = new File(path);
@@ -182,8 +191,12 @@ public class RoomService{
 			File target = new File(path+"\\"+userIndex, fileName);
 			FileCopyUtils.copy(file.getBytes(), target);
 			
+	        amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, target).withCannedAcl(CannedAccessControlList.PublicRead));
+	        amazonS3Client.getUrl(bucketName, fileName).toString();
 			
-			
+	        
+	        
+	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -204,5 +217,11 @@ public class RoomService{
 	
 	
 	//DELETE
+	
+	public void deleteUnAvailableDateByRoomIndex(Long roomIndex) {
+		roomMapper.deleteUnAvailableDateByRoomIndex(roomIndex);
+	}
+	
+	
 	
 }
