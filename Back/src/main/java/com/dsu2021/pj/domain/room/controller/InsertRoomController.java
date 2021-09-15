@@ -83,7 +83,17 @@ public class InsertRoomController {
 	
 	@PostMapping("/rooms/{roomIndex}/images")
 	public ResponseEntity<?> insertRoomImages(@PathVariable Long roomIndex,@RequestParam MultipartFile file){
-		return new ResponseEntity<>(service.insertRoomImages(roomIndex,file),HttpStatus.OK);
+		
+		String url = service.insertRoomImages(roomIndex,file);
+		
+		if(url == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}else if(url.equals("error")) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		}else {
+			return new ResponseEntity<>(url,HttpStatus.OK);
+		}
+		
 	}
 	
 	@PostMapping("rooms/{roomIndex}/unavailable-date")

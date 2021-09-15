@@ -24,6 +24,7 @@ import com.dsu2021.pj.domain.room.entity.Facility;
 import com.dsu2021.pj.domain.room.entity.Information;
 import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.room.entity.RoomAddress;
+import com.dsu2021.pj.domain.room.entity.RoomImagePath;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
 
@@ -104,8 +105,8 @@ public class RoomService{
 		return roomMapper.getFacilityByRoomIndex(roomIndex);
 	}
 	
-	public RoomDTO.RoomFacilityRes getImagesByRoomIndex(Long roomIndex){
-		return roomMapper.getFacilityByRoomIndex(roomIndex);
+	public RoomDTO.RoomImageRes[] getImagesByRoomIndex(Long roomIndex){
+		return roomMapper.getImagesByRoomIndex(roomIndex);
 	}
 	
 	public RoomDTO.RoomAddressRes getAddressByRoomAddressIndex(Long roomAddressIndex){
@@ -172,36 +173,44 @@ public class RoomService{
 	}
 	
 	
-	public RoomDTO.RoomImageRes insertRoomImages(Long roomIndex,MultipartFile file){
+	public String insertRoomImages(Long roomIndex,MultipartFile file){
 		try {
-			if(null==roomMapper.getRoomByIndex(roomIndex))
+			RoomDTO.RoomRes room = roomMapper.getRoomByIndex(roomIndex);
+			
+			if(null == room)
 				return null;
 			
-			Long userIndex = 2l; // 로그인 구현되면 수정할 것
+			Long userIndex = 10l; // 로그인 구현되면 수정할 것. 현재 유저인덱스를 할당.
+			
+			if(room.getUserIndex() != userIndex)
+				return null;
+			
 			final String fileName = file.getOriginalFilename();
-			String path = "C:\\Users\\user\\Desktop\\Images\\roomImages\\" + roomIndex;
+			String path = "C:\\Users\\user\\Desktop\\roomImages";
 			
 			File folder = new File(path);
 			if(!folder.exists())
 				folder.mkdir();
-			folder = new File(path+"\\"+userIndex);
-			if(!folder.exists())
-				folder.mkdir();
 			
-			File target = new File(path+"\\"+userIndex, fileName);
+			File target = new File(path, fileName);
 			FileCopyUtils.copy(file.getBytes(), target);
 			
-	        amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, target).withCannedAcl(CannedAccessControlList.PublicRead));
-	        amazonS3Client.getUrl(bucketName, fileName).toString();
+			RoomDTO.RoomImageRes[] savedImages = roomMapper.getImagesByRoomIndex(roomIndex);
+			int lastImageNumber = 0;
+			if(savedImages.length != 0)
+				lastImageNumber = savedImages.length;
+				
 			
+	        amazonS3Client.putObject(new PutObjectRequest(bucketName, Long.toString(roomIndex)+"\\"+(lastImageNumber+1)+"\\"+fileName , target).withCannedAcl(CannedAccessControlList.PublicRead));
+			roomMapper.insertRoomImagePath(new RoomImagePath(roomIndex,lastImageNumber+1,amazonS3Client.getUrl(bucketName, Long.toString(roomIndex)+"\\"+(lastImageNumber+1)+"\\"+fileName).toString()));
 	        
-	        
+	        target.delete();
+			return amazonS3Client.getUrl(bucketName, Long.toString(roomIndex)+"\\"+(lastImageNumber+1)+"\\"+fileName).toString();
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "error";
 		}
-		
-		return null;
 	}
 
 	public Long insertUnAvailableDate(Long roomIndex, Date[] unavailableDates) {

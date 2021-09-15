@@ -64,7 +64,7 @@ public class SearchRoomController {
 	}
 	
 	@GetMapping("/rooms/{roomIndex}/images")
-	public ResponseEntity<RoomDTO.RoomFacilityRes> getImagesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
+	public ResponseEntity<RoomDTO.RoomImageRes[]> getImagesByRoomIndex(@PathVariable("roomIndex") Long roomIndex){
 		
 		return new ResponseEntity<>(service.getImagesByRoomIndex(roomIndex),HttpStatus.OK);
 	}
