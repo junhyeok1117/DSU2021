@@ -231,6 +231,8 @@ public class RoomService{
 		roomMapper.deleteUnAvailableDateByRoomIndex(roomIndex);
 	}
 	
-	
+	public void deleteUnAvailableDateByRoomIndexAndInputDate(Long roomIndex, Date inputDate) {
+		roomMapper.deleteUnAvailableDateByRoomIndexAndInputDate(roomIndex,inputDate);
+	}
 	
 }

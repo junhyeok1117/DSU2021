@@ -142,5 +142,9 @@
 	<delete id = "deleteUnAvailableDateByRoomIndex">
 		DELETE FROM unavailable_date WHERE room_index = #{roomIndex};
 	</delete>
+	
+	<delete id = "deleteUnAvailableDateByRoomIndexAndInputDate">
+		DELETE FROM unavailable_date WHERE room_index = #{roomIndex} AND date = #{inputDate};
+	</delete>
 
 </mapper>

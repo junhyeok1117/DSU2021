@@ -36,15 +36,16 @@ public class DeleteRoomController {
 	}
 	
 	@DeleteMapping("/rooms/{roomIndex}/unavailable-date/date/{inputDate}")
-	public ResponseEntity<RoomDTO.RoomAddressRes> deleteUnAvailableDateByRoomIndexAnd(@PathVariable("roomIndex") Long roomIndex,@PathVariable("inputDate") String inputDate){
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+	public ResponseEntity<RoomDTO.RoomAddressRes> deleteUnAvailableDateByRoomIndexAndInputDate(@PathVariable("roomIndex") Long roomIndex,@PathVariable("inputDate") String inputDate){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date date = sdf.parse(inputDate);
-			System.out.println("입"+date);
+			date = new Date(date.getTime() + 1000*60*60*9);
+			service.deleteUnAvailableDateByRoomIndexAndInputDate(roomIndex,date);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
