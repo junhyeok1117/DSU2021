@@ -40,6 +40,8 @@ public interface RoomMapper {
 	
 	public RoomDTO.RoomFacilityRes getFacilityByRoomIndex(Long roomIndex);
 	
+	public RoomDTO.RoomImageRes[] getImagesByRoomIndex(Long roomIndex);
+	
 	public RoomDTO.RoomAddressRes getAddressByRoomAddressIndex(Long roomAddressIndex);
 	
 	public RoomDTO.RoomCategoryRes getCategoryByCategoryIndex(Long categoryIndex);
@@ -66,10 +68,12 @@ public interface RoomMapper {
 	
 // PATCH
 	
-	
-	
 // PUT
 	
+// DELETE
 	
+	public void deleteUnAvailableDateByRoomIndex(Long roomIndex);
+	
+	public void deleteUnAvailableDateByRoomIndexAndInputDate(Long roomIndex, Date inputDate);
 	
 }

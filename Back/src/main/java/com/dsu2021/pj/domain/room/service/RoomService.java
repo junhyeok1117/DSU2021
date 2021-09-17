@@ -1,28 +1,43 @@
 package com.dsu2021.pj.domain.room.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.dsu2021.pj.domain.host.repository.HostMapper;
 import com.dsu2021.pj.domain.room.dto.RoomDTO;
-import com.dsu2021.pj.domain.room.dto.TestDTO;
 import com.dsu2021.pj.domain.room.entity.UnAvailableDate;
 import com.dsu2021.pj.domain.room.entity.Category;
 import com.dsu2021.pj.domain.room.entity.Facility;
 import com.dsu2021.pj.domain.room.entity.Information;
 import com.dsu2021.pj.domain.room.entity.Room;
 import com.dsu2021.pj.domain.room.entity.RoomAddress;
+import com.dsu2021.pj.domain.room.entity.RoomImagePath;
 import com.dsu2021.pj.domain.room.repository.RoomMapper;
 import com.dsu2021.pj.domain.room.service.RoomService;
 
 @Service
 public class RoomService{
+	
+    // 버킷 이름 동적 할당
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucketName;
+
+    @Autowired
+    private AmazonS3Client amazonS3Client;
+    
 	
 	//READ
 	
@@ -90,8 +105,8 @@ public class RoomService{
 		return roomMapper.getFacilityByRoomIndex(roomIndex);
 	}
 	
-	public RoomDTO.RoomFacilityRes getImagesByRoomIndex(Long roomIndex){
-		return roomMapper.getFacilityByRoomIndex(roomIndex);
+	public RoomDTO.RoomImageRes[] getImagesByRoomIndex(Long roomIndex){
+		return roomMapper.getImagesByRoomIndex(roomIndex);
 	}
 	
 	public RoomDTO.RoomAddressRes getAddressByRoomAddressIndex(Long roomAddressIndex){
@@ -158,27 +173,66 @@ public class RoomService{
 	}
 	
 	
-	public RoomDTO.RoomImageRes insertImages(Long roomIndex,MultipartFile file){
-		
-		String fileName = file.getOriginalFilename();
-		String path = roomIndex+"/"+fileName;
-		
-		System.out.println(file.getOriginalFilename());
-		System.out.println(path);
-		
-		return null;
+	public String insertRoomImages(Long roomIndex,MultipartFile file){
+		try {
+			RoomDTO.RoomRes room = roomMapper.getRoomByIndex(roomIndex);
+			
+			if(null == room)
+				return null;
+			
+			Long userIndex = 10l; // 로그인 구현되면 수정할 것. 현재 유저인덱스를 할당.
+			
+			if(room.getUserIndex() != userIndex)
+				return null;
+			
+			final String fileName = file.getOriginalFilename();
+			String path = "C:\\Users\\user\\Desktop\\roomImages";
+			
+			File folder = new File(path);
+			if(!folder.exists())
+				folder.mkdir();
+			
+			File target = new File(path, fileName);
+			FileCopyUtils.copy(file.getBytes(), target);
+			
+			RoomDTO.RoomImageRes[] savedImages = roomMapper.getImagesByRoomIndex(roomIndex);
+			int lastImageNumber = 0;
+			if(savedImages.length != 0)
+				lastImageNumber = savedImages.length;
+				
+			
+	        amazonS3Client.putObject(new PutObjectRequest(bucketName, Long.toString(roomIndex)+"\\"+(lastImageNumber+1)+"\\"+fileName , target).withCannedAcl(CannedAccessControlList.PublicRead));
+			roomMapper.insertRoomImagePath(new RoomImagePath(roomIndex,lastImageNumber+1,amazonS3Client.getUrl(bucketName, Long.toString(roomIndex)+"\\"+(lastImageNumber+1)+"\\"+fileName).toString()));
+	        
+	        target.delete();
+			return amazonS3Client.getUrl(bucketName, Long.toString(roomIndex)+"\\"+(lastImageNumber+1)+"\\"+fileName).toString();
+	        
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "error";
+		}
 	}
 
-//	public Long insertUnavailableDate(Long roomIndex, Date[] unavailableDate) {
-//		if(unavailableDate != null) 
-//			for(Date date : unavailableDate)
-//				//roomMapper.insertUnavailableDate(new UnAvailableDate(roomIndex,date));
-//		return roomIndex;
-//	}
+	public Long insertUnAvailableDate(Long roomIndex, Date[] unavailableDates) {
+		
+		if(unavailableDates != null) 
+			for(Date date : unavailableDates)
+				roomMapper.insertUnAvailableDate(new UnAvailableDate(roomIndex,date));
+		
+		return roomIndex;
+	}
 	
 	//UPDATE
 	
 	
 	//DELETE
+	
+	public void deleteUnAvailableDateByRoomIndex(Long roomIndex) {
+		roomMapper.deleteUnAvailableDateByRoomIndex(roomIndex);
+	}
+	
+	public void deleteUnAvailableDateByRoomIndexAndInputDate(Long roomIndex, Date inputDate) {
+		roomMapper.deleteUnAvailableDateByRoomIndexAndInputDate(roomIndex,inputDate);
+	}
 	
 }

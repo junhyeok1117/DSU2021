@@ -153,7 +153,7 @@ public class RoomDTO {
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class RoomImageRes{ //방 이미지 조회 & 방 이미지 추가 응답 DTO
+	public static class RoomImageRes{ //방 이미지 조회 응답 DTO
 		private Long roomIndex;
 		private int imageNumber;
 		private String imagePath;

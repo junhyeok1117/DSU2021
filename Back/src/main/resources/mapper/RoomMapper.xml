@@ -83,6 +83,10 @@
 		SELECT room_index roomIndex, bed, bath,tv, hair_dryer hairDryer,fire_extinguisher fireExtinguisher, refrigerator, microwave, cookware,park,aircon,kitchen,wifi,washing_machine washingMachine FROM facility WHERE room_index = #{roomIndex};
 	</select>
 	
+	<select id = "getImagesByRoomIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomImageRes">
+		SELECT room_index roomIndex, image_number imageNumber, image_path imagePath FROM room_image_path WHERE room_index = #{roomIndex} ORDER BY image_number;
+	</select>
+	
 	<select id = "getAddressByRoomAddressIndex" resultType="com.dsu2021.pj.domain.room.dto.RoomDTO$RoomAddressRes">
 		SELECT room_address_index roomAddressIndex, si_do siDo, si_gun_gu siGunGu, eup_myeon_dong eupMyeonDong, road_name roadName, detail_address detailAddress FROM room_address WHERE room_address_index = #{roomAddressIndex};
 	</select>
@@ -132,5 +136,15 @@
 	<insert id = "insertUnAvailableDate">
 		INSERT INTO unavailable_date (room_index,date) VALUES (#{roomIndex},#{date});
 	</insert>
+	
+		<!-- DELETE -->
+		
+	<delete id = "deleteUnAvailableDateByRoomIndex">
+		DELETE FROM unavailable_date WHERE room_index = #{roomIndex};
+	</delete>
+	
+	<delete id = "deleteUnAvailableDateByRoomIndexAndInputDate">
+		DELETE FROM unavailable_date WHERE room_index = #{roomIndex} AND date = #{inputDate};
+	</delete>
 
 </mapper>
