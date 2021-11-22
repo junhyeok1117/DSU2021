@@ -14,21 +14,21 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		
-	        registry.addMapping("/reservations/**").allowedOrigins("http://localhost:3000").allowedMethods("GET", "POST", "OPTIONS", "PUT")
-	                .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
-	                        "Access-Control-Request-Headers","Cookie")
-	                .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-	                .allowCredentials(true).maxAge(3600);
-	        
-	        registry.addMapping("/signIn/**").allowedOrigins("http://localhost:3000").allowedMethods("GET", "POST", "OPTIONS", "PUT")
-            .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
-                    "Access-Control-Request-Headers","Cookie")
-            .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-            .allowCredentials(true).maxAge(3600);
-	}
+//	@Override
+//	public void addCorsMappings(CorsRegistry registry) {
+//
+//	        registry.addMapping("/reservations/**").allowedOrigins("http://localhost:3000").allowedMethods("GET", "POST", "OPTIONS", "PUT")
+//	                .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
+//	                        "Access-Control-Request-Headers","Cookie")
+//	                .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
+//	                .allowCredentials(true).maxAge(3600);
+//
+//	        registry.addMapping("/signIn/**").allowedOrigins("http://localhost:3000").allowedMethods("GET", "POST", "OPTIONS", "PUT")
+//            .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
+//                    "Access-Control-Request-Headers","Cookie")
+//            .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
+//            .allowCredentials(true).maxAge(3600);
+//	}
 	
 	// AWS S3
 	
